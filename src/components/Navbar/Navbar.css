@@ -1,0 +1,36 @@
+.navbar{
+    display: flex;
+    position: sticky;
+    justify-content: space-between;
+    align-items: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 25px 70px;
+    height: 10vh;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+
+.navbar ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+}
+
+.navbar ul li{
+    list-style: none;
+    padding: 0 20px;
+}
+
+.navbar ul li a{
+    text-decoration: none;
+    color:black;
+}
+
+
+.navbar ul li a:hover{
+    color: orange;
+}
