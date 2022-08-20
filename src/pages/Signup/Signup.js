@@ -103,9 +103,7 @@ export default function Signup() {
           );
         })}
         <SignInButtonWrapper>
-          <Button width="100%" height="2rem" color="white" background="orange">
-            SIGN IN
-          </Button>
+          <Button>SIGN IN</Button>
         </SignInButtonWrapper>
       </SignInContent>
     </Wrapper>

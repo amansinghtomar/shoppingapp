@@ -65,25 +65,18 @@ export default function Login() {
               <InputWrapper>
                 <Input onChange={handleChange} onBlur={onBlur} {...inputData} />
                 {touched[inputData.name] && errors[[inputData.name]] && (
-                  <Typography value="p" color="red">
+                  <Typography value="p" color="error">
                     {errors[inputData.name]}
                   </Typography>
                 )}
               </InputWrapper>
             );
           })}
-          <Typography as="p" hover="true" color="orange">
+          <Typography as="p" hover="true" color="primary">
             Forgot Password
           </Typography>
           <SignInButtonWrapper>
-            <Button
-              onClick={handleSignin}
-              disabled={isValid}
-              width="100%"
-              height="2rem"
-              color="white"
-              background="orange"
-            >
+            <Button onClick={handleSignin} disabled={isValid}>
               SIGN IN
             </Button>
           </SignInButtonWrapper>
@@ -93,14 +86,7 @@ export default function Login() {
             OR
           </Typography>
           <GoogleSignIn>
-            <Button
-              width="100%"
-              height="2rem"
-              color="white"
-              background="orange"
-            >
-              Google Signin
-            </Button>
+            <Button>Google Signin</Button>
           </GoogleSignIn>
           <StyledLink to="/signup">New Customer? Signup</StyledLink>
         </SignInBottom>
