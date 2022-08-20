@@ -3,6 +3,9 @@ import { Avatar } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import LocalGroceryStoreOutlinedIcon from "@mui/icons-material/LocalGroceryStoreOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+
+
 
 export const CardWrapper = styled.div`
   background-color: white;
@@ -62,6 +65,17 @@ export const CardBottom = styled.div`
 export const FavoriteButton = styled(FavoriteBorderOutlinedIcon)`
   margin-right: 8px;
   padding: 6px;
+  &:hover {
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 50px;
+  }
+`;
+
+export const FavoriteButtonRed = styled(FavoriteIcon)`
+  margin-right: 8px;
+  padding: 6px;
+  color: red;
   &:hover {
     cursor: pointer;
     background: rgba(0, 0, 0, 0.04);
