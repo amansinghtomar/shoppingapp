@@ -6,6 +6,7 @@ const theme = {
     primary: "#6C63FF",
     secondary: "white",
     defaultColor: "black",
+    error: "red",
   },
 };
 

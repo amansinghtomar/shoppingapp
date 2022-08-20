@@ -13,9 +13,7 @@ function Cart() {
         <Typography as="p" textAlign="center" gutterBottom="10">
           You are not following anyone
         </Typography>
-        <Button width="100%" height="40px" background="#6C63FF" color="white">
-          Explore People
-        </Button>
+        <Button>Explore People</Button>
       </Container>
     </Wrapper>
   );

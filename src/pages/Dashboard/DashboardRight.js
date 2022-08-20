@@ -19,7 +19,7 @@ const DashboardRightContainer = () => {
           <Avatar />
           <Typography as="p">Aman Tomar</Typography>
         </AccountInfo>
-        <Typography as="p" hover="true" color="orange" onClick={randomFunction}>
+        <Typography as="p" hover="true" onClick={randomFunction}>
           Follow
         </Typography>
       </AccountSuggestion>

@@ -1,5 +1,4 @@
 import Typography from "../Typography/Typography";
-import { Button } from "../Button/Button";
 import React from "react";
 import {
   CardBottom,
@@ -33,47 +32,36 @@ export default function Card({
             <Typography as="p" fontWeight="500">
               Aman Tomar
             </Typography>
-            <Typography
-              as="p"
-              fontWeight="lighter"
-              color="rgba(0, 0, 0, 0.54)"
-              fontSize="0.9em"
-            >
+            <Typography as="p" fontWeight="lighter" fontSize="0.9em">
               Mumbai Maharashrtra
             </Typography>
           </UserInfo>
         </UserDetail>
-        <Button>
-          <UserActionIcon
-            onClick={(event) => handleUserAction(event.currentTarget)}
-            color="action"
-          />
-          <Items
-            anchorEl={anchorEl}
-            open={userAction}
-            handleClose={() => handleUserAction(null)}
-            menuList={menuList}
-          />
-        </Button>
+
+        <UserActionIcon
+          onClick={(event) => handleUserAction(event.currentTarget)}
+          color="action"
+        />
+        <Items
+          anchorEl={anchorEl}
+          open={userAction}
+          handleClose={() => handleUserAction(null)}
+          menuList={menuList}
+        />
       </CardTop>
       <ContentImage src={image}></ContentImage>
       <CardBottom>
         <LikesContainer>
-          <Button>
-            <FavoriteButton fontSize="large" />
-          </Button>
-
+          <FavoriteButton fontSize="large" />
           <Typography as="p">6</Typography>
         </LikesContainer>
-        <Button>
-          <CartButton fontSize="large" />
-        </Button>
+        <CartButton fontSize="large" />
       </CardBottom>
       <CardDetail>
         <Typography as="p" gutterBottom="8">
           This is my first Card
         </Typography>
-        <Typography hover="true" color={true}>
+        <Typography hover="true" color="primary">
           View Prices and Reviews
         </Typography>
       </CardDetail>
