@@ -72,21 +72,35 @@ export default function Login() {
               </InputWrapper>
             );
           })}
-          <Typography variant="p" hover="true" color="orange">
+          <Typography as="p" hover="true" color="orange">
             Forgot Password
           </Typography>
           <SignInButtonWrapper>
-            <Button onClick={handleSignin} disabled={isValid}>
+            <Button
+              onClick={handleSignin}
+              disabled={isValid}
+              width="100%"
+              height="2rem"
+              color="white"
+              background="orange"
+            >
               SIGN IN
             </Button>
           </SignInButtonWrapper>
         </SignInTop>
         <SignInBottom>
-          <Typography variant="body1" textAlign="center">
+          <Typography as="p" textAlign="center">
             OR
           </Typography>
           <GoogleSignIn>
-            <Button>Google Signin</Button>
+            <Button
+              width="100%"
+              height="2rem"
+              color="white"
+              background="orange"
+            >
+              Google Signin
+            </Button>
           </GoogleSignIn>
           <StyledLink to="/signup">New Customer? Signup</StyledLink>
         </SignInBottom>

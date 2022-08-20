@@ -16,8 +16,14 @@ import {
   UserInfo,
 } from "./Cardstyles";
 import image from "../../assets/temp.jpg";
+import Items from "../MenuItem/Items";
 
-export default function Card() {
+export default function Card({
+  userAction,
+  handleUserAction,
+  menuList,
+  anchorEl,
+}) {
   return (
     <CardWrapper>
       <CardTop>
@@ -37,20 +43,29 @@ export default function Card() {
             </Typography>
           </UserInfo>
         </UserDetail>
-        <Button background="white">
-          <UserActionIcon />
+        <Button>
+          <UserActionIcon
+            onClick={(event) => handleUserAction(event.currentTarget)}
+            color="action"
+          />
+          <Items
+            anchorEl={anchorEl}
+            open={userAction}
+            handleClose={() => handleUserAction(null)}
+            menuList={menuList}
+          />
         </Button>
       </CardTop>
       <ContentImage src={image}></ContentImage>
       <CardBottom>
         <LikesContainer>
-          <Button background="white">
+          <Button>
             <FavoriteButton fontSize="large" />
           </Button>
 
           <Typography as="p">6</Typography>
         </LikesContainer>
-        <Button background="white">
+        <Button>
           <CartButton fontSize="large" />
         </Button>
       </CardBottom>
@@ -58,7 +73,9 @@ export default function Card() {
         <Typography as="p" gutterBottom="8">
           This is my first Card
         </Typography>
-        <Typography hover="true">View Prices and Reviews</Typography>
+        <Typography hover="true" color={true}>
+          View Prices and Reviews
+        </Typography>
       </CardDetail>
     </CardWrapper>
   );

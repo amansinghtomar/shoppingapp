@@ -5,9 +5,48 @@ import "./Navbar.css";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
-import Items from "./Items";
+import Items from "../MenuItem/Items";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import PersonAdd from "@mui/icons-material/PersonAdd";
+import Settings from "@mui/icons-material/Settings";
+import Logout from "@mui/icons-material/Logout";
 
-export default function Navbar({ isAuthenticated }) {
+const menuList = [
+  {
+    name: "Profile",
+    iconType: <Avatar />,
+  },
+  {
+    name: "My Account",
+    iconType: <Avatar />,
+  },
+  {
+    name: "Add Another account",
+    iconType: (
+      <ListItemIcon>
+        <PersonAdd fontSize="small" />
+      </ListItemIcon>
+    ),
+  },
+  {
+    name: "Settings",
+    iconType: (
+      <ListItemIcon>
+        <Settings fontSize="small" />
+      </ListItemIcon>
+    ),
+  },
+  {
+    name: "Logout",
+    iconType: (
+      <ListItemIcon>
+        <Logout fontSize="small" />
+      </ListItemIcon>
+    ),
+  },
+];
+
+export default function Navbar({ isAuthenticated = true }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -44,6 +83,7 @@ export default function Navbar({ isAuthenticated }) {
             anchorEl={anchorEl}
             open={open}
             handleClose={() => setAnchorEl(null)}
+            menuList={menuList}
           />
         </ul>
       </div>

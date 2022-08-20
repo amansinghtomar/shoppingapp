@@ -39,5 +39,5 @@ export const GoogleSignIn = styled.div`
 export const StyledLink = styled(Link)`
   text-decoration: none;
   text-align: center;
-  color: orange;
+  color: ${(props) => props.theme.colors.primary};
 `;

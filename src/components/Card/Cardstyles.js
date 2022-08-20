@@ -36,6 +36,7 @@ export const UserInfo = styled.div`
 
 export const UserActionIcon = styled(MoreVertIcon)`
   margin-right: 9px;
+
   &:hover {
     cursor: pointer;
     border-radius: 50px;
