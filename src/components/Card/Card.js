@@ -50,7 +50,6 @@ export default function Card({
                 </Typography>
               </UserInfo>
             </UserDetail>
-
             <UserActionIcon
               onClick={(event) => handleUserAction(event.currentTarget)}
               color="action"
