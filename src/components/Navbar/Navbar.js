@@ -10,6 +10,17 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
+import {
+  NavbarContainer,
+  NavLink,
+  NavList,
+  NavListConatiner,
+  NavUl,
+} from "./NavbarStyles";
+import HomeIcon from "@mui/icons-material/Home";
+import ExploreIcon from "@mui/icons-material/Explore";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import LoginIcon from "@mui/icons-material/Login";
 
 const menuList = [
   {
@@ -46,7 +57,7 @@ const menuList = [
   },
 ];
 
-export default function Navbar({ isAuthenticated = true }) {
+export default function Navbar({ isAuthenticated }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -61,32 +72,40 @@ export default function Navbar({ isAuthenticated = true }) {
         </IconButton>
       </Tooltip>
     ) : (
-      <Link to={"login"}>Login</Link>
+      <NavLink to={"login"}>
+        <LoginIcon />
+      </NavLink>
     );
   };
   return (
-    <div className="navbar">
+    <NavbarContainer>
       <Typography variant="h5">My Art Cart</Typography>
-      <div className="nav">
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/following">Following</Link>
-          </li>
-          <li>
-            <Link to="cart">Cart</Link>
-          </li>
-          <li>{checkAuthentication()}</li>
+      <NavListConatiner className="nav">
+        <NavUl>
+          <NavList>
+            <NavLink to="/">
+              <HomeIcon />
+            </NavLink>
+          </NavList>
+          <NavList>
+            <NavLink to="/following">
+              <ExploreIcon />
+            </NavLink>
+          </NavList>
+          <NavList>
+            <NavLink to="cart">
+              <ShoppingCartIcon />
+            </NavLink>
+          </NavList>
+          <NavList>{checkAuthentication()}</NavList>
           <Items
             anchorEl={anchorEl}
             open={open}
             handleClose={() => setAnchorEl(null)}
             menuList={menuList}
           />
-        </ul>
-      </div>
-    </div>
+        </NavUl>
+      </NavListConatiner>
+    </NavbarContainer>
   );
 }

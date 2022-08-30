@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const Typography = styled.p`
   font-size: ${(props) => props.fontSize && props.fontSize};
+  font-weight: ${(props) => props.fontWeight && props.fontWeight};
   color: ${(props) =>
     props.color === "error"
       ? props.theme.colors.error

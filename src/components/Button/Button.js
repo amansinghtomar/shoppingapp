@@ -5,8 +5,14 @@ export const Button = styled.button`
   height: ${(props) => (props.height ? props.height : "2rem")};
   font-size: 1em;
   border: none;
-  background-color: ${(props) => props.theme.colors.primary};
-  color: ${(props) => props.theme.colors.secondary};
+  background-color: ${(props) =>
+    props.variant === "secondary"
+      ? props.theme.colors.secondary
+      : props.theme.colors.primary};
+  color: ${(props) =>
+    props.variant === "secondary"
+      ? props.theme.colors.primary
+      : props.theme.colors.secondary};
 
   &:hover {
     cursor: pointer;

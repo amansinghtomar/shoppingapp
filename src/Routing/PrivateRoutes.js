@@ -4,7 +4,7 @@ import Empty from "../components/Empty/Empty";
 import NoData from "../assets/Nodata.svg";
 
 function PrivateRoutes({ children }) {
-  const auth = false;
+  const auth = true;
   const router = useNavigate();
   return auth ? (
     children

@@ -1,11 +1,9 @@
 import styled from "styled-components";
-import { Avatar } from "@mui/material";
+import { Avatar, Dialog } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import LocalGroceryStoreOutlinedIcon from "@mui/icons-material/LocalGroceryStoreOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-
-
 
 export const CardWrapper = styled.div`
   background-color: white;
@@ -104,4 +102,8 @@ export const CardOverview = styled.div`
 
 export const CardDetail = styled.div`
   padding: 8px 20px;
+`;
+
+export const CustomDialog = styled(Dialog)`
+  background: transparent;
 `;
