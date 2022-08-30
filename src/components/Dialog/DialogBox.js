@@ -15,20 +15,34 @@ function DialogBox({
   open,
   handleClose,
 }) {
-  //   const [open, setOpen] = React.useState(false);
-
-  //   const handleClickOpen = () => {
-  //     setOpen(true);
-  //   };
-
-  //   const handleClose = () => {
-  //     setOpen(false);
-  //   };
   return (
     <>
-      {/* <Button variant="outlined" onClick={handleClickOpen}>
-        {buttonName}{" "}
-      </Button> */}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        BackdropProps={{
+          style: {
+            backgroundColor: "black",
+            opacity: 0.1,
+          },
+        }}
+      >
+        <DialogTitle id="alert-dialog-title">product </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Let Google help apps determine location. This means sending
+            anonymous location data to Google, even when no apps are running.
+          </DialogContentText>
+          <DialogContentText id="alert-dialog-description">
+            100000{" "}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Close</Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }
