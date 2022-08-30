@@ -49,7 +49,7 @@ export default function Card({
       {postLists.length !== 0 || postLists ? (
         postLists.map((post) => {
           return (
-            <CardWrapper key={post.id}>
+            <CardWrapper>
               <CardTop>
                 <UserDetail>
                   <UserImage />
@@ -62,7 +62,6 @@ export default function Card({
                     </Typography>
                   </UserInfo>
                 </UserDetail>
-
                 <UserActionIcon
                   onClick={(event) => handleUserAction(event.currentTarget)}
                   color="action"
@@ -98,45 +97,7 @@ export default function Card({
                   {post.caption}
                 </Typography>
                 <Typography hover="true" color="primary">
-                  <Button onClick={() => setOpen(!open)}>
-                    View Description
-                  </Button>
-
-                  <Dialog
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                    BackdropProps={{
-                      style: {
-                        backgroundColor: "black",
-                        opacity: 0.1,
-                      },
-                    }}
-                  >
-                    <DialogTitle id="alert-dialog-title">product </DialogTitle>
-                    <DialogContent>
-                      <DialogContentText id="alert-dialog-description">
-                        Let Google help apps determine location. This means
-                        sending anonymous location data to Google, even when no
-                        apps are running.
-                      </DialogContentText>
-                      <DialogContentText id="alert-dialog-description">
-                        100000{" "}
-                      </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                      <Button onClick={handleClose}>Close</Button>
-                    </DialogActions>
-                  </Dialog>
-                  {/* <CustomizedDialogs
-                    handleClose={handleClose}
-                    open={open}
-                    buttonName="View Description"
-                    productName="ProductName"
-                    productDetail="This is a very good Product"
-                    price="1000"
-                  /> */}
+                  View Prices and Reviews
                 </Typography>
               </CardDetail>
             </CardWrapper>
