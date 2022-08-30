@@ -11,19 +11,15 @@ function DefaultMenuItem() {
     setAge(event.target.value);
   };
   return (
-    <FormControl sx={{ m: 1, minWidth: 80, minHeight: 20 }}>
-      <InputLabel id="demo-simple-select-autowidth-label">Age</InputLabel>
+    <FormControl sx={{ m: 1, width: "70px", margin: "0" }} size="small">
       <Select
         labelId="demo-simple-select-autowidth-label"
         id="demo-simple-select-autowidth"
         value={age}
         onChange={handleChange}
         autoWidth
-        label="Age"
+        sx={{ height: "30px" }}
       >
-        <MenuItem value="">
-          <em>None</em>
-        </MenuItem>
         <MenuItem value={10}>1</MenuItem>
         <MenuItem value={21}>2</MenuItem>
         <MenuItem value={22}>3</MenuItem>

@@ -5,6 +5,7 @@ export const ShoppingCardWrapper = styled.div`
   display: flex;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background: white;
+  margin-top: 10px;
   @media (max-width: 536px) {
     width: 100%;
   }
@@ -13,7 +14,7 @@ export const ShoppingCardWrapper = styled.div`
 export const ShoppingCardImage = styled.img`
   width: 100px;
   height: 150px;
-  margin: 3px;
+  margin: 5px;
 `;
 
 export const ShoppingCardInfo = styled.div`
@@ -21,7 +22,7 @@ export const ShoppingCardInfo = styled.div`
   flex-direction: column;
   justify-content: space-around;
   margin-left: 12px;
-  padding-top: 20px;
+  padding-top: 5px;
   flex: 1;
 `;
 

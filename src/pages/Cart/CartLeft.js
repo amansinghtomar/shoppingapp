@@ -7,6 +7,9 @@ function CartLeft() {
     <CartLeftConatiner>
       <CartCardContainer>
         <ShoppingCard />
+        <ShoppingCard />
+        <ShoppingCard />
+        <ShoppingCard />
       </CartCardContainer>
     </CartLeftConatiner>
   );
