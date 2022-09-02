@@ -4,6 +4,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import LocalGroceryStoreOutlinedIcon from "@mui/icons-material/LocalGroceryStoreOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { Link } from "react-router-dom";
 
 export const CardWrapper = styled.div`
   background-color: white;
@@ -106,4 +107,9 @@ export const CardDetail = styled.div`
 
 export const CustomDialog = styled(Dialog)`
   background: transparent;
+`;
+
+export const CustomLink = styled(Link)`
+  text-decoration: none;
+  color: ${(props) => props.theme.colors.defaultColor};
 `;
