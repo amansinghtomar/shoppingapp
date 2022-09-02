@@ -22,11 +22,7 @@ import Items from "../MenuItem/Items";
 import Empty from "../Empty/Empty";
 import NoData from "../../assets/Nodata.svg";
 import { useNavigate } from "react-router-dom";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
+import DialogBox from "../Dialog/DialogBox";
 
 export default function Card({
   userAction,
@@ -38,8 +34,10 @@ export default function Card({
 }) {
   const router = useNavigate();
   const [open, setOpen] = React.useState(false);
-  const handleClickOpen = () => {
+  const [viewPost, setViewPost] = React.useState({});
+  const handleClickOpen = (post) => {
     setOpen(true);
+    setViewPost(post)
   };
   const handleClose = () => {
     setOpen(false);
@@ -97,7 +95,8 @@ export default function Card({
                   {post.caption}
                 </Typography>
                 <Typography hover="true" color="primary">
-                  View Prices and Reviews
+                  <Button onClick={()=>handleClickOpen(post)}>View Product</Button>
+                  <DialogBox handleClose={handleClose} open={open} post = {viewPost} />
                 </Typography>
               </CardDetail>
             </CardWrapper>

@@ -6,15 +6,16 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Button } from "../Button/Button";
+import { Typography } from "@mui/material";
+import { ContainerHeading, ProductName,ProductPrice,ProductDetail,ProductReview,ProductReviewDeatils,ReviewContainer } from "./DialogStyles";
+
 
 function DialogBox({
-  buttonName,
-  productName,
-  productDetail,
-  price,
+  post,
   open,
   handleClose,
 }) {
+  console.log("post",post.review)
   return (
     <>
       <Dialog
@@ -29,19 +30,40 @@ function DialogBox({
           },
         }}
       >
-        <DialogTitle id="alert-dialog-title">product </DialogTitle>
+        
+         
+ <ContainerHeading >
+            <ProductName> {post.productName}</ProductName>
+            <ProductPrice>{`$ ${post.productPrice}` }</ProductPrice>
+          </ContainerHeading>
+          <ProductDetail> {post.productDetail}</ProductDetail>
+        <ProductReview>Customer Reviews { `(${post.review && post.review.length})`} </ProductReview>
+        {post.review && post.review.length !== 0 && post.review.map(review => {
+          return (
+            <ReviewContainer>
+               <ProductReviewDeatils>{review.comment}</ProductReviewDeatils>
+            <ProductReviewDeatils>{ review.name}</ProductReviewDeatils>
+            </ReviewContainer>
+           
+          )
+        } )}
+       
+         
+         
+       
+        {/* <DialogTitle id="alert-dialog-title">{post.productName} </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending
-            anonymous location data to Google, even when no apps are running.
+           {post.productDetail}
           </DialogContentText>
           <DialogContentText id="alert-dialog-description">
-            100000{" "}
+           {post.productPrice}
           </DialogContentText>
+         
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Close</Button>
-        </DialogActions>
+        </DialogActions> */}
       </Dialog>
     </>
   );

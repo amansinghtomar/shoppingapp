@@ -5,7 +5,24 @@ export const postList = [
     location: "Mumbai",
     likeCount: 0,
     caption: "this is my great art",
-    like:false
+    like: false,
+    productName: "Beautiful Product",
+    productPrice: 100,
+    productDetail: "It is a very good product It is a very good product It is a very good product It is a very good product ",
+    review: [
+      {
+        name: "Nikita Ubale",
+        comment : "Good product"
+      },
+        {
+        name: "Nikita Ubale",
+        comment : "Good product"
+      },
+          {
+        name: "Nikita Ubale",
+        comment : "Good product"
+      }
+    ]
   },
   {
      id:'2',
@@ -13,7 +30,24 @@ export const postList = [
     location: "Mumbai",
     likeCount: 0,
     caption: "this is my great art",
-    like:false
+    like: false,
+    productName: "Beautiful Product",
+    productPrice: 100,
+    productDetail: "It is a very good product It is a very good product It is a very good product It is a very good product ",
+    review: [
+      {
+        name: "Nikita Ubale",
+        comment : "Good product"
+      },
+        {
+        name: "Nikita Ubale",
+        comment : "Good product"
+      },
+          {
+        name: "Nikita Ubale",
+        comment : "Good product"
+      }
+    ]
   },
   {
       id:'3',
@@ -21,7 +55,24 @@ export const postList = [
     location: "Mumbai",
     likeCount: 0,
     caption: "this is my great art",
-     like:false
+    like: false,
+     productName: "Beautiful Product",
+    productPrice: 100,
+    productDetail: "It is a very good product It is a very good product It is a very good product It is a very good product ",
+    review: [
+      {
+        name: "Nikita Ubale",
+        comment : "Good product"
+      },
+        {
+        name: "Nikita Ubale",
+        comment : "Good product"
+      },
+          {
+        name: "Nikita Ubale",
+        comment : "Good product"
+      }
+    ]
   },
   {
        id:'4',
@@ -29,7 +80,24 @@ export const postList = [
     location: "Mumbai",
     likeCount: 0,
     caption: "this is my great art",
-     like:false
+    like: false,
+     productName: "Beautiful Product",
+    productPrice: 100,
+    productDetail: "It is a very good product It is a very good product It is a very good product It is a very good product ",
+    review: [
+      {
+        name: "Nikita Ubale",
+        comment : "Good product"
+      },
+        {
+        name: "Nikita Ubale",
+        comment : "Good product"
+      },
+          {
+        name: "Nikita Ubale",
+        comment : "Good product"
+      }
+    ]
   },
   {
         id:'5',
@@ -37,7 +105,24 @@ export const postList = [
     location: "Mumbai",
     likeCount: 0,
     caption: "this is my great art",
-     like:false
+    like: false,
+     productName: "Beautiful Product",
+    productPrice: 100,
+    productDetail: "It is a very good product It is a very good product It is a very good product It is a very good product ",
+    review: [
+      {
+        name: "Nikita Ubale",
+        comment : "Good product"
+      },
+        {
+        name: "Nikita Ubale",
+        comment : "Good product"
+      },
+          {
+        name: "Nikita Ubale",
+        comment : "Good product"
+      }
+    ]
   },
   {
          id:'6',
@@ -45,6 +130,23 @@ export const postList = [
     location: "Mumbai",
     likeCount: 0,
     caption: "this is my great art",
-     like:false
+    like: false,
+     productName: "Beautiful Product",
+    productPrice: 100,
+    productDetail: "It is a very good product It is a very good product It is a very good product It is a very good product ",
+    review: [
+      {
+        name: "Nikita Ubale",
+        comment : "Good product"
+      },
+        {
+        name: "Nikita Ubale",
+        comment : "Good product"
+      },
+          {
+        name: "Nikita Ubale",
+        comment : "Good product"
+      }
+    ]
   }
 ]
