@@ -14,15 +14,20 @@ import {
   UserImage,
   UserInfo,
   FavoriteButtonRed,
+  CustomLink,
 } from "./Cardstyles";
-import CustomizedDialogs from "../Dialog/DialogBox";
+import DialogBox from "../Dialog/DialogBox";
 import { Button } from "../Button/Button";
 import image from "../../assets/temp.jpg";
 import Items from "../MenuItem/Items";
 import Empty from "../Empty/Empty";
 import NoData from "../../assets/Nodata.svg";
 import { useNavigate } from "react-router-dom";
-import DialogBox from "../Dialog/DialogBox";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 export default function Card({
   userAction,
@@ -51,10 +56,13 @@ export default function Card({
               <CardTop>
                 <UserDetail>
                   <UserImage />
+
                   <UserInfo>
-                    <Typography as="p" fontWeight="500">
-                      {post.name}
-                    </Typography>
+                    <CustomLink to="/profile">
+                      <Typography as="p" fontWeight="500">
+                        {post.name}
+                      </Typography>
+                    </CustomLink>
                     <Typography as="p" fontWeight="lighter" fontSize="0.9em">
                       {post.location}
                     </Typography>
