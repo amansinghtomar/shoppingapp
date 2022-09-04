@@ -23,11 +23,7 @@ import Items from "../MenuItem/Items";
 import Empty from "../Empty/Empty";
 import NoData from "../../assets/Nodata.svg";
 import { useNavigate } from "react-router-dom";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
+
 
 export default function Card({
   userAction,
@@ -38,15 +34,12 @@ export default function Card({
   handleLike,
 }) {
   const router = useNavigate();
-  const [open, setOpen] = React.useState(false);
-  const [viewPost, setViewPost] = React.useState({});
+
   const handleClickOpen = (post) => {
-    setOpen(true);
-    setViewPost(post)
+        router(`/product/${post.id}`,{state:post});
   };
-  const handleClose = () => {
-    setOpen(false);
-  };
+
+
   return (
     <>
       {postLists.length !== 0 || postLists ? (
@@ -79,7 +72,7 @@ export default function Card({
                   menuList={menuList}
                 />
               </CardTop>
-              <ContentImage src={image}></ContentImage>
+              <ContentImage src={image} />
               <CardBottom>
                 <LikesContainer>
                   {post.like ? (
@@ -103,8 +96,8 @@ export default function Card({
                   {post.caption}
                 </Typography>
                 <Typography hover="true" color="primary">
-                  <Button onClick={()=>handleClickOpen(post)}>View Product</Button>
-                  <DialogBox handleClose={handleClose} open={open} post = {viewPost} />
+                
+                   <Button onClick={()=>handleClickOpen(post)}>View Product</Button>
                 </Typography>
               </CardDetail>
             </CardWrapper>
