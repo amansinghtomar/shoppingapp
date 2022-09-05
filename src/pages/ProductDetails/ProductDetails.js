@@ -7,124 +7,141 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 import StarIcon from "@mui/icons-material/Star";
 import Typography from "../../components/Typography/Typography";
-
 import {
-	ImageWrapper,
-	Image,
-	ProductContainer,
-	ProductDetailContainer,
-	ProductTitleConatainer,
-	ProductName,
-	RatingContainer,
-	RatingCount,
-	PriceContainer,
-	Price,
-	MRP,
-	Discount,
-	Tax,
-	ButtonContainer,
-	DeliveryDate,
-	SellerName,
-	DeliveryContainer,
-	ProductDetailHeading,
-	ProductDetail,
-	ProductDetailHeadingContainer,
-	HandmadeProduct,
-	CustomerReviews,
-	ReviewContainer,
-	ProductReviewDeatils,
-	ReviewerName,
-	Star,
-
+  ImageWrapper,
+  Image,
+  ProductContainer,
+  ProductDetailContainer,
+  ProductTitleConatainer,
+  RatingContainer,
+  PriceContainer,
+  ButtonContainer,
+  DeliveryContainer,
+  ProductDetailHeadingContainer,
+  ReviewContainer,
+  StarContainer,
 } from "./ProductDetailStyle";
+import { Divider } from "@mui/material";
 
 export default function ProductDetails() {
-	const location = useLocation();
+  const location = useLocation();
 
-	return (
-		<>
-			<ProductContainer>
-				<ImageWrapper>
-					<Image src={location.state.image}></Image>
-				</ImageWrapper>
+  return (
+    <>
+      <ProductContainer>
+        <ImageWrapper>
+          <Image src={location.state.image}></Image>
+        </ImageWrapper>
 
-				<ProductDetailContainer>
+        <ProductDetailContainer>
           <ProductTitleConatainer>
-             <Typography as="h1" fontWeight="600">
-         {location.state.productName}
-        </Typography>
-						<ProductName>{location.state.productName}</ProductName>
-						<ShareIcon>Share</ShareIcon>
-					</ProductTitleConatainer>
+            <Typography as="h1" fontWeight="600">
+              {location.state.productName}
+            </Typography>
+            <ShareIcon>Share</ShareIcon>
+          </ProductTitleConatainer>
 
-					<RatingContainer>
-						<RatingCount>
-							{`${location.state.review && location.state.review.length} Reviews`}{" "}
-						</RatingCount>
-						<Rating
-							name="half-rating-read"
-							defaultValue={2.5}
-							precision={location.state.star}
-							readOnly
-						/>
-					</RatingContainer>
+          <RatingContainer>
+            <Typography>
+              {`${
+                location.state.review && location.state.review.length
+              } Reviews`}
+            </Typography>
 
-					<PriceContainer>
-						<Price>{`$ ${location.state.productPrice}`}</Price>
-						<MRP>
-							<s>{`MRP ${location.state.TotalMRP}`}</s>
-						</MRP>
-						<Discount>{`${location.state.productDiscount}% OFF`}</Discount>
-					</PriceContainer>
+            <Rating
+              name="half-rating-read"
+              defaultValue={2.5}
+              precision={location.state.star}
+              readOnly
+            />
+          </RatingContainer>
 
-					<Tax>{`Inclusive of all taxes`}</Tax>
+          <PriceContainer>
+            <Typography
+              as="h2"
+              fontWeight="600"
+            >{`$ ${location.state.productPrice}`}</Typography>
+            <Typography as="h2" fontWeight="600">
+              <s>{`MRP ${location.state.TotalMRP}`}</s>
+            </Typography>
+            <Typography
+              as="h3"
+              color="primary"
+            >{`${location.state.productDiscount}% OFF`}</Typography>
+          </PriceContainer>
 
-					<ButtonContainer>
-						<Button width="135px" height="41px" borderRadius="5px">
-							Add To Bag
-						</Button>
-						<Button width="135px" height="41px" border-radius="5px">
-	
-							Whishlist
-						</Button>
-					</ButtonContainer>
+          <Typography
+            fontWeight="100"
+            color="primary"
+          >{`Inclusive of all taxes`}</Typography>
 
-					<DeliveryContainer>
-						<LocalShippingIcon style={{ color: "dimgray" }}></LocalShippingIcon>
-						<DeliveryDate>{`Deliver By : ${location.state.DeliveryDate}`}</DeliveryDate>
-					</DeliveryContainer>
+          <ButtonContainer>
+            <Button width="135px" height="41px" borderRadius="5px">
+              Add To Bag
+            </Button>
+            <Button width="135px" height="41px" border-radius="5px">
+              Whishlist
+            </Button>
+          </ButtonContainer>
 
-          <SellerName>{`Seller : ${location.state.SellerName}`}</SellerName>
-          
-					<ProductDetailHeadingContainer>
-						<TextSnippetIcon style={{ color: "dimgray" }}></TextSnippetIcon>
-						<ProductDetailHeading>PRODUCT DETAILS </ProductDetailHeading>
-					</ProductDetailHeadingContainer>
-					<ProductDetail>{location.state.productDetail}</ProductDetail>
-					<HandmadeProduct>100% original and handmade product</HandmadeProduct>
+          <DeliveryContainer>
+            <LocalShippingIcon style={{ color: "dimgray" }}></LocalShippingIcon>
+            <Typography>{`Deliver By : ${location.state.DeliveryDate}`}</Typography>
+          </DeliveryContainer>
 
-					<CustomerReviews>{`Customer Reviews (${
-						location.state.review && location.state.review.length
-					})`}</CustomerReviews>
-					{location.state.review &&
-						location.state.review.length !== 0 &&
-						location.state.review.map((review) => {
-							return (
-								<>
-									<ReviewContainer>
-										<StarIcon
-											style={{ color: "goldenrod", fontSize: "16px", marginTop: "4px" }}
-										></StarIcon>
-										<Star>{review.star}</Star>
+          <Typography>{`Seller : ${location.state.SellerName}`}</Typography>
 
-										<ProductReviewDeatils>{review.comment}</ProductReviewDeatils>
-									</ReviewContainer>
-									<ReviewerName>{review.name}</ReviewerName>
-								</>
-							);
-						})}
-				</ProductDetailContainer>
-			</ProductContainer>
-		</>
-	);
+          <Divider sx={{ marginTop: "10px" }} />
+          <ProductDetailHeadingContainer>
+            <TextSnippetIcon style={{ color: "dimgray" }}></TextSnippetIcon>
+            <Typography as="h4" fontWeight="700">
+              PRODUCT DETAILS
+            </Typography>
+          </ProductDetailHeadingContainer>
+          <Typography gutterBottom="20">
+            {location.state.productDetail}
+          </Typography>
+
+          <Typography color="primary">
+            100% original and handmade product
+          </Typography>
+
+          <Divider sx={{ marginTop: "10px", marginBottom: "10px" }} />
+
+          <Typography as="h5" fontWeight="600">{`Customer Reviews (${
+            location.state.review && location.state.review.length
+          })`}</Typography>
+
+          {location.state.review &&
+            location.state.review.length !== 0 &&
+            location.state.review.map((review) => {
+              return (
+                <>
+                  <ReviewContainer>
+                    <StarContainer>
+                      <Typography
+                        color="secondary"
+                        fontSize="12px"
+                        fontWeight="500"
+                      >
+                        {review.star}
+                      </Typography>
+                      <StarIcon
+                        style={{
+                          color: "white",
+                          fontSize: "16px",
+                        }}
+                      ></StarIcon>
+                    </StarContainer>
+
+                    <Typography>{review.comment}</Typography>
+                  </ReviewContainer>
+                  <Typography>{review.name}</Typography>
+                </>
+              );
+            })}
+        </ProductDetailContainer>
+      </ProductContainer>
+    </>
+  );
 }

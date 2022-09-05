@@ -8,6 +8,8 @@ const Typography = styled.p`
       ? props.theme.colors.error
       : props.color === "primary"
       ? props.theme.colors.primary
+      : props.color === "secondary"
+      ? props.theme.colors.secondary
       : props.theme.colors.default};
   text-align: ${(props) => props.textAlign && props.textAlign};
   margin-bottom: ${(props) => props.gutterBottom && `${props.gutterBottom}px`};
