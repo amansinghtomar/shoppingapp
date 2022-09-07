@@ -21,8 +21,18 @@ import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LoginIcon from "@mui/icons-material/Login";
+import { useNavigate } from "react-router-dom";
 
-const menuList = [
+
+
+
+export default function Navbar({ isAuthenticated = true }) {
+
+  const router = useNavigate();
+
+  const settingItemList = ["About Us", "Terms and Condition", "Privacy Policy","Delete Account"]
+
+  const menuList = [
   {
     name: "Profile",
     iconType: <Avatar />,
@@ -38,6 +48,7 @@ const menuList = [
         <PersonAdd fontSize="small" />
       </ListItemIcon>
     ),
+
   },
   {
     name: "Settings",
@@ -46,6 +57,10 @@ const menuList = [
         <Settings fontSize="small" />
       </ListItemIcon>
     ),
+        handleClick : () => {
+          console.log('clicked')
+                  router('/setting',{state:settingItemList});
+    }
   },
   {
     name: "Logout",
@@ -57,7 +72,6 @@ const menuList = [
   },
 ];
 
-export default function Navbar({ isAuthenticated }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
