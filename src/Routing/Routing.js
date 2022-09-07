@@ -8,6 +8,7 @@ import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import Profile from "../pages/Profile/Profile";
 import Setting from "../pages/Setting/Setting";
 import Signup from "../pages/Signup/Signup";
+import Wishlist from "../pages/Wishlist/Wishlist";
 import PrivateRoutes from "./PrivateRoutes";
 
 function Routing() {
@@ -19,7 +20,8 @@ function Routing() {
       <Route path="profile" element={<Profile />} />
       <Route path="product/:id" element={<ProductDetails />} />
       <Route path="setting" element={<Setting/>}/>
-            <Route path="following" element={<Following/>}/>
+      <Route path="following" element={<Following />} />
+      <Route path="wishlist" element={<Wishlist/>}/>
       <Route
         path="cart"
         element={

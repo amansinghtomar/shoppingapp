@@ -51,7 +51,7 @@ export const CardMiddle = styled.div`
 
 export const ContentImage = styled.img`
   width: 100%;
-  height: 100%;
+  height: 25rem;
 `;
 
 export const CardBottom = styled.div`
