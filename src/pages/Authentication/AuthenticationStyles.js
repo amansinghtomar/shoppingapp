@@ -19,14 +19,6 @@ export const SignInTop = styled.div`
   flex-direction: column;
 `;
 
-export const InputWrapper = styled.div`
-  padding: 15px 0;
-`;
-
-export const SignInButtonWrapper = styled.div`
-  margin-top: 35px;
-`;
-
 export const SignInBottom = styled.div`
   margin-top: 20px;
 `;
@@ -40,4 +32,11 @@ export const StyledLink = styled(Link)`
   text-decoration: none;
   text-align: center;
   color: ${(props) => props.theme.colors.primary};
+  margin-bottom: ${(props) => props.gutterBottom && "5px"};
+`;
+
+export const LoginLinkWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;

@@ -4,16 +4,15 @@ import {
   Wrapper,
   SignInContent,
   SignInTop,
-  InputWrapper,
-  SignInButtonWrapper,
   SignInBottom,
   GoogleSignIn,
   StyledLink,
-} from "./LoginStyles";
+  LoginLinkWrapper,
+} from "./AuthenticationStyles";
 import { Button } from "../../components/Button/Button";
-import { Input } from "../../components/Input/Input";
 import useInput from "../../hooks/useInput";
 import { emailValidate, passwordValidator } from "../../utils";
+import Form from "../../components/Form/Form";
 
 export default function Login() {
   const validations = {
@@ -57,29 +56,17 @@ export default function Login() {
     <Wrapper>
       <SignInContent>
         <SignInTop>
-          <Typography as="h2" textAlign="center">
-            SignIn
-          </Typography>
-          {signinInput.map((inputData) => {
-            return (
-              <InputWrapper>
-                <Input onChange={handleChange} onBlur={onBlur} {...inputData} />
-                {touched[inputData.name] && errors[[inputData.name]] && (
-                  <Typography value="p" color="error">
-                    {errors[inputData.name]}
-                  </Typography>
-                )}
-              </InputWrapper>
-            );
-          })}
-          <Typography as="p" hover="true" color="primary">
-            Forgot Password
-          </Typography>
-          <SignInButtonWrapper>
-            <Button onClick={handleSignin} disabled={isValid}>
-              SIGN IN
-            </Button>
-          </SignInButtonWrapper>
+          <Form
+            formTitle="SignIn"
+            formFields={signinInput}
+            handleChange={handleChange}
+            onBlur={onBlur}
+            touched={touched}
+            errors={errors}
+            actionButtonTitle="SignUp"
+            isValid={isValid}
+            handleActionButton={handleSignin}
+          />
         </SignInTop>
         <SignInBottom>
           <Typography as="p" textAlign="center">
@@ -88,7 +75,12 @@ export default function Login() {
           <GoogleSignIn>
             <Button>Google Signin</Button>
           </GoogleSignIn>
-          <StyledLink to="/signup">New Customer? Signup</StyledLink>
+          <LoginLinkWrapper>
+            <StyledLink to="/signup">New Customer? Signup</StyledLink>
+            <Typography as="p" hover="true" color="primary">
+              Need help?
+            </Typography>
+          </LoginLinkWrapper>
         </SignInBottom>
       </SignInContent>
     </Wrapper>

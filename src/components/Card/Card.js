@@ -16,14 +16,12 @@ import {
   FavoriteButtonRed,
   CustomLink,
 } from "./Cardstyles";
-import DialogBox from "../Dialog/DialogBox";
 import { Button } from "../Button/Button";
 import image from "../../assets/temp.jpg";
 import Items from "../MenuItem/Items";
 import Empty from "../Empty/Empty";
 import NoData from "../../assets/Nodata.svg";
 import { useNavigate } from "react-router-dom";
-
 
 export default function Card({
   userAction,
@@ -36,9 +34,8 @@ export default function Card({
   const router = useNavigate();
 
   const handleClickOpen = (post) => {
-        router(`/product/${post.id}`,{state:post});
+    router(`/product/${post.id}`, { state: post });
   };
-
 
   return (
     <>
@@ -96,8 +93,12 @@ export default function Card({
                   {post.caption}
                 </Typography>
                 <Typography hover="true" color="primary">
-                
-                   <Button onClick={()=>handleClickOpen(post)}>View Product</Button>
+                  <Button
+                    variant="secondary"
+                    onClick={() => handleClickOpen(post)}
+                  >
+                    View Product
+                  </Button>
                 </Typography>
               </CardDetail>
             </CardWrapper>
