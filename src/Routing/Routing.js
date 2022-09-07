@@ -7,7 +7,6 @@ import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import Profile from "../pages/Profile/Profile";
 import Signup from "../pages/Authentication/Signup";
 import Following from "../pages/Following/Following";
-import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import Setting from "../pages/Setting/Setting";
 import PrivateRoutes from "./PrivateRoutes";
 
@@ -19,8 +18,8 @@ function Routing() {
       <Route path="signup" element={<Signup />} />
       <Route path="profile" element={<Profile />} />
       <Route path="product/:id" element={<ProductDetails />} />
-      <Route path="setting" element={<Setting/>}/>
-      <Route path="following" element={<Following/>}/>
+      <Route path="setting" element={<Setting />} />
+      <Route path="following" element={<Following />} />
 
       <Route
         path="cart"
