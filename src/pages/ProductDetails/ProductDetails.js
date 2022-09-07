@@ -5,7 +5,6 @@ import Rating from "@mui/material/Rating";
 import ShareIcon from "@mui/icons-material/Share";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
-import StarIcon from "@mui/icons-material/Star";
 import Typography from "../../components/Typography/Typography";
 import {
   ImageWrapper,
@@ -18,10 +17,9 @@ import {
   ButtonContainer,
   DeliveryContainer,
   ProductDetailHeadingContainer,
-  ReviewContainer,
-  StarContainer,
 } from "./ProductDetailStyle";
 import { Divider } from "@mui/material";
+import Reviews from "./Reviews";
 
 export default function ProductDetails() {
   const location = useLocation();
@@ -115,30 +113,7 @@ export default function ProductDetails() {
           {location.state.review &&
             location.state.review.length !== 0 &&
             location.state.review.map((review) => {
-              return (
-                <>
-                  <ReviewContainer>
-                    <StarContainer>
-                      <Typography
-                        color="secondary"
-                        fontSize="12px"
-                        fontWeight="500"
-                      >
-                        {review.star}
-                      </Typography>
-                      <StarIcon
-                        style={{
-                          color: "white",
-                          fontSize: "16px",
-                        }}
-                      ></StarIcon>
-                    </StarContainer>
-
-                    <Typography>{review.comment}</Typography>
-                  </ReviewContainer>
-                  <Typography>{review.name}</Typography>
-                </>
-              );
+              return <Reviews review={review} />;
             })}
         </ProductDetailContainer>
       </ProductContainer>

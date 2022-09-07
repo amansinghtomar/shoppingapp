@@ -2,13 +2,13 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Cart from "../pages/Cart/Cart";
 import Dashboard from "../pages/Dashboard/Dashboard";
-import Following from "../pages/Following/Following";
-import Login from "../pages/Login/Login";
+import Login from "../pages/Authentication/Login";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import Profile from "../pages/Profile/Profile";
+import Signup from "../pages/Authentication/Signup";
+import Following from "../pages/Following/Following";
 import Setting from "../pages/Setting/Setting";
 import Signup from "../pages/Signup/Signup";
-import Wishlist from "../pages/Wishlist/Wishlist";
 import PrivateRoutes from "./PrivateRoutes";
 
 function Routing() {
@@ -20,8 +20,7 @@ function Routing() {
       <Route path="profile" element={<Profile />} />
       <Route path="product/:id" element={<ProductDetails />} />
       <Route path="setting" element={<Setting/>}/>
-      <Route path="following" element={<Following />} />
-      <Route path="wishlist" element={<Wishlist/>}/>
+            <Route path="following" element={<Following/>}/>
       <Route
         path="cart"
         element={

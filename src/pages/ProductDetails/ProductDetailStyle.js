@@ -3,6 +3,8 @@ import styled from "styled-components";
 export const ProductContainer = styled.div`
   display: flex;
   margin: 40px;
+  background: ${(props) => props.theme.colors.secondary};
+  padding: 15px;
 `;
 
 export const ImageWrapper = styled.div`
