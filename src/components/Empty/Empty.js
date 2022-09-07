@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "../../components/Button/Button";
 import Typography from "../../components/Typography/Typography";
-import { Wrapper } from "../../pages/Login/LoginStyles";
+import { Wrapper } from "../../pages/Authentication/AuthenticationStyles";
 import { Container, NoDataImage } from "./EmptyStyles";
 
 function Empty({ image, message, btnTitle, handleBtn }) {

@@ -1,14 +1,5 @@
 import React from "react";
-import Typography from "../../components/Typography/Typography";
-import {
-  Wrapper,
-  SignInContent,
-  SignInTop,
-  InputWrapper,
-  SignInButtonWrapper,
-} from "../Login/LoginStyles";
-import { Input } from "../../components/Input/Input";
-import { Button } from "../../components/Button/Button";
+import { Wrapper, SignInContent } from "./AuthenticationStyles";
 import {
   emailValidate,
   mobileValidator,
@@ -17,6 +8,7 @@ import {
   rePasswordValidator,
 } from "../../utils";
 import useInput from "../../hooks/useInput";
+import Form from "../../components/Form/Form";
 
 export default function Signup() {
   const validations = {
@@ -82,29 +74,24 @@ export default function Signup() {
     },
   ];
 
+  const handleSignup = () => {
+    reset();
+  };
+
   return (
     <Wrapper>
       <SignInContent>
-        <SignInTop></SignInTop>
-        <Typography as="h2" textAlign="center">
-          Sign Up
-        </Typography>
-
-        {signupInput.map((inputData) => {
-          return (
-            <InputWrapper>
-              <Input onChange={handleChange} onBlur={onBlur} {...inputData} />
-              {touched[inputData.name] && errors[[inputData.name]] && (
-                <Typography value="p" color="red">
-                  {errors[inputData.name]}
-                </Typography>
-              )}
-            </InputWrapper>
-          );
-        })}
-        <SignInButtonWrapper>
-          <Button>SIGN IN</Button>
-        </SignInButtonWrapper>
+        <Form
+          formTitle="SignUp"
+          formFields={signupInput}
+          handleChange={handleChange}
+          onBlur={onBlur}
+          touched={touched}
+          errors={errors}
+          actionButtonTitle="SignUp"
+          isValid={isValid}
+          handleActionButton={handleSignup}
+        />
       </SignInContent>
     </Wrapper>
   );
