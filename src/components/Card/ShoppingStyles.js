@@ -15,6 +15,7 @@ export const ShoppingCardImage = styled.img`
   width: 100px;
   height: 150px;
   margin: 5px;
+  object-fit: cover;
 `;
 
 export const ShoppingCardInfo = styled.div`
