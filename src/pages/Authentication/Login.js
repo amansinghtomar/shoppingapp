@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useReducer } from "react";
 import Typography from "../../components/Typography/Typography";
 import {
   Wrapper,
@@ -13,8 +13,25 @@ import { Button } from "../../components/Button/Button";
 import useInput from "../../hooks/useInput";
 import { emailValidate, passwordValidator } from "../../utils";
 import Form from "../../components/Form/Form";
+import { useDispatch, useSelector } from "react-redux";
+import { userAuth } from "../../redux/authenticationSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const user = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const route = useNavigate();
+
+  useEffect(() => {
+    if (user.isAuthenticated) {
+      route("/");
+    }
+
+    if (Object.keys(user.error).length > 0) {
+      console.log(user.error.message);
+    }
+  }, [user.error, user.isAuthenticated]);
+
   const validations = {
     email: function ({ email }) {
       return emailValidate(email);
@@ -34,6 +51,8 @@ export default function Login() {
     );
 
   const handleSignin = () => {
+    value.method = "signin";
+    dispatch(userAuth(value));
     reset();
   };
 
@@ -57,13 +76,13 @@ export default function Login() {
       <SignInContent>
         <SignInTop>
           <Form
-            formTitle="SignIn"
+            formTitle="Login"
             formFields={signinInput}
             handleChange={handleChange}
             onBlur={onBlur}
             touched={touched}
             errors={errors}
-            actionButtonTitle="SignUp"
+            actionButtonTitle="Login"
             isValid={isValid}
             handleActionButton={handleSignin}
           />

@@ -8,6 +8,10 @@ import { Provider } from "react-redux";
 import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 import GlobalStyle from "./GlobalStyles";
 import Theme from "./Theme";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistStore } from "redux-persist";
+
+let persistor = persistStore(store);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -16,7 +20,9 @@ root.render(
       <ErrorBoundary>
         <GlobalStyle />
         <Theme>
-          <App />
+          <PersistGate loading={null} persistor={persistor}>
+            <App />
+          </PersistGate>
         </Theme>
       </ErrorBoundary>
     </BrowserRouter>

@@ -1,119 +1,87 @@
 import Typography from "../Typography/Typography";
 import React from "react";
 import {
-  CardBottom,
-  CardDetail,
-  CardTop,
-  CardWrapper,
-  CartButton,
-  ContentImage,
-  FavoriteButton,
-  LikesContainer,
-  UserActionIcon,
-  UserDetail,
-  UserImage,
-  UserInfo,
-  FavoriteButtonRed,
-  CustomLink,
+   CardBottom,
+   CardDetail,
+   CardTop,
+   CardWrapper,
+   CartButton,
+   ContentImage,
+   FavoriteButton,
+   LikesContainer,
+   UserActionIcon,
+   UserDetail,
+   UserImage,
+   UserInfo,
+   FavoriteButtonRed,
+   CustomLink,
 } from "./Cardstyles";
 import { Button } from "../Button/Button";
 import image from "../../assets/temp.jpg";
 import Items from "../MenuItem/Items";
-import Empty from "../Empty/Empty";
-import NoData from "../../assets/Nodata.svg";
-import { useNavigate } from "react-router-dom";
 
 export default function Card({
-  userAction,
-  handleUserAction,
-  menuList,
-  anchorEl,
-  postLists,
-  handleLike,
+   userAction,
+   handleUserAction,
+   menuList,
+   anchorEl,
+   post,
+   handleLike,
+   handleClickOpen,
 }) {
-  const router = useNavigate();
-
-  const handleClickOpen = (post) => {
-    router(`/product/${post.id}`, { state: post });
-  };
-
-  return (
-    <>
-      {postLists.length !== 0 || postLists ? (
-        postLists.map((post) => {
-          return (
-            <CardWrapper>
-              <CardTop>
-                <UserDetail>
-                  <UserImage />
-
-                  <UserInfo>
-                    <CustomLink to="/profile">
-                      <Typography as="p" fontWeight="500">
+   return (
+      <CardWrapper>
+         <CardTop>
+            <UserDetail>
+               <UserImage />
+               <UserInfo>
+                  <CustomLink to="/profile">
+                     <Typography as="p" fontWeight="500">
                         {post.name}
-                      </Typography>
-                    </CustomLink>
-                    <Typography as="p" fontWeight="lighter" fontSize="0.9em">
-                      {post.location}
-                    </Typography>
-                  </UserInfo>
-                </UserDetail>
-                <UserActionIcon
-                  onClick={(event) => handleUserAction(event.currentTarget)}
-                  color="action"
-                />
-                <Items
-                  anchorEl={anchorEl}
-                  open={userAction}
-                  handleClose={() => handleUserAction(null)}
-                  menuList={menuList}
-                />
-              </CardTop>
-              <ContentImage src={image} />
-              <CardBottom>
-                <LikesContainer>
-                  {post.like ? (
-                    <FavoriteButtonRed
-                      onClick={() => handleLike(post.id, post.like)}
-                      fontSize="large"
-                    />
-                  ) : (
-                    <FavoriteButton
-                      onClick={() => handleLike(post.id, post.like)}
-                      fontSize="large"
-                    />
-                  )}
+                     </Typography>
+                  </CustomLink>
+                  <Typography as="p" fontWeight="lighter" fontSize="0.9em">
+                     {post.location}
+                  </Typography>
+               </UserInfo>
+            </UserDetail>
+            <UserActionIcon
+               onClick={(event) => handleUserAction(event.currentTarget)}
+               color="action"
+            />
+            <Items
+               anchorEl={anchorEl}
+               open={userAction}
+               handleClose={() => handleUserAction(null)}
+               menuList={menuList}
+            />
+         </CardTop>
+         <ContentImage src={image} />
+         <CardBottom>
+            <LikesContainer>
+               {post.like ? (
+                  <FavoriteButtonRed
+                     onClick={() => handleLike(post.id, post.like)}
+                     fontSize="large"
+                  />
+               ) : (
+                  <FavoriteButton onClick={() => handleLike(post.id, post.like)} fontSize="large" />
+               )}
 
-                  <Typography as="p"> {post.likeCount}</Typography>
-                </LikesContainer>
-                <CartButton fontSize="large" />
-              </CardBottom>
-              <CardDetail>
-                <Typography as="p" gutterBottom="8">
-                  {post.caption}
-                </Typography>
-                <Typography hover="true" color="primary">
-                  <Button
-                    variant="secondary"
-                    onClick={() => handleClickOpen(post)}
-                  >
-                    View Product
-                  </Button>
-                </Typography>
-              </CardDetail>
-            </CardWrapper>
-          );
-        })
-      ) : (
-        <Empty
-          image={NoData}
-          message="You are not following anyone"
-          btnTitle="Explore"
-          handleBtn={() => {
-            router("../", { replace: true });
-          }}
-        />
-      )}
-    </>
-  );
+               <Typography as="p"> {post.likeCount}</Typography>
+            </LikesContainer>
+            <CartButton fontSize="large" />
+         </CardBottom>
+         <CardDetail>
+            <Typography as="p" gutterBottom="8">
+               {post.caption}
+            </Typography>
+            <Typography hover="true" color="primary">
+               <Button variant="secondary" onClick={() => handleClickOpen(post)}>
+                  View Product
+               </Button>
+            </Typography>
+         </CardDetail>
+      </CardWrapper>
+   );
 }

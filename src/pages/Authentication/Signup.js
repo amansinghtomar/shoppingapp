@@ -1,33 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Wrapper, SignInContent } from "./AuthenticationStyles";
-import {
-  emailValidate,
-  mobileValidator,
-  nameValidator,
-  passwordValidator,
-  rePasswordValidator,
-} from "../../utils";
+
 import useInput from "../../hooks/useInput";
 import Form from "../../components/Form/Form";
+import { useDispatch, useSelector } from "react-redux";
+import { userAuth } from "../../redux/authenticationSlice";
+import { useNavigate } from "react-router-dom";
+import signUpvalidations from "./authValidation";
 
 export default function Signup() {
-  const validations = {
-    email: function ({ email }) {
-      return emailValidate(email);
-    },
-    password: function ({ password }) {
-      return passwordValidator(password);
-    },
-    repassword: function ({ repassword, password }) {
-      return rePasswordValidator(repassword, password);
-    },
-    name: function ({ name }) {
-      return nameValidator(name);
-    },
-    mobile: function ({ mobile }) {
-      return mobileValidator(mobile);
-    },
-  };
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth);
+  const route = useNavigate();
+
+  useEffect(() => {
+    if (user.isAuthenticated) {
+      route("/");
+    }
+
+    if (Object.keys(user.error).length > 0) {
+      console.log(user.error.message);
+    }
+  }, [user.error, user.isAuthenticated]);
 
   const { value, handleChange, reset, isValid, errors, touched, onBlur } =
     useInput(
@@ -38,7 +32,7 @@ export default function Signup() {
         email: "",
         mobile: "",
       },
-      validations
+      signUpvalidations
     );
 
   const signupInput = [
@@ -75,6 +69,8 @@ export default function Signup() {
   ];
 
   const handleSignup = () => {
+    value.method = "signup";
+    dispatch(userAuth(value));
     reset();
   };
 
