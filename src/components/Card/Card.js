@@ -56,7 +56,7 @@ export default function Card({
                menuList={menuList}
             />
          </CardTop>
-         <ContentImage src={image} />
+         <ContentImage src={post.image} />
          <CardBottom>
             <LikesContainer>
                {post.like ? (

@@ -1,122 +1,79 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Button } from "../../components/Button/Button";
-import Rating from "@mui/material/Rating";
-import ShareIcon from "@mui/icons-material/Share";
-import LocalShippingIcon from "@mui/icons-material/LocalShipping";
-import TextSnippetIcon from "@mui/icons-material/TextSnippet";
-import Typography from "../../components/Typography/Typography";
 import {
-  ImageWrapper,
-  Image,
-  ProductContainer,
-  ProductDetailContainer,
-  ProductTitleConatainer,
-  RatingContainer,
-  PriceContainer,
-  ButtonContainer,
-  DeliveryContainer,
-  ProductDetailHeadingContainer,
+   ImageWrapper,
+   Image,
+   ProductContainer,
+   ProductDetailContainer,
 } from "./ProductDetailStyle";
-import { Divider } from "@mui/material";
 import Reviews from "./Reviews";
+import { ProductHeader, ProductActions, ProductInfo } from "./ProductInfo";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../../firebase";
+import { useSelector } from "react-redux";
 
 export default function ProductDetails() {
-  const location = useLocation();
+   const location = useLocation();
+   const [product, setProduct] = useState({});
+   const { posts } = useSelector((state) => state.post);
 
-  return (
-    <>
-      <ProductContainer>
-        <ImageWrapper>
-          <Image src={location.state.image}></Image>
-        </ImageWrapper>
+   useEffect(() => {
+      const { pathname } = location;
+      const id = pathname.split("/")[2];
+      const newproduct = posts.length > 0 && posts.find((post) => post.id === id);
+      if (newproduct) {
+         setProduct(newproduct);
+      } else {
+         getData(id);
+      }
+   }, []);
 
-        <ProductDetailContainer>
-          <ProductTitleConatainer>
-            <Typography as="h1" fontWeight="600">
-              {location.state.productName}
-            </Typography>
-            <ShareIcon>Share</ShareIcon>
-          </ProductTitleConatainer>
+   const getData = async (id) => {
+      const collRef = collection(db, "Posts");
+      const response = query(collRef, where("id", "==", id));
+      const querySnapshot = await getDocs(response);
+      querySnapshot.forEach((doc) => {
+         console.log("doc", doc.data());
+         setProduct(doc.data());
+      });
+   };
 
-          <RatingContainer>
-            <Typography>
-              {`${
-                location.state.review && location.state.review.length
-              } Reviews`}
-            </Typography>
+   return (
+      <>
+         {Object.keys(product).length > 0 && (
+            <ProductContainer>
+               <ImageWrapper>
+                  <Image src={product.image}></Image>
+               </ImageWrapper>
 
-            <Rating
-              name="half-rating-read"
-              defaultValue={2.5}
-              precision={location.state.star}
-              readOnly
-            />
-          </RatingContainer>
+               <ProductDetailContainer>
+                  <ProductHeader
+                     productName={product.productName}
+                     review={product.review}
+                     star={product.star}
+                  />
 
-          <PriceContainer>
-            <Typography
-              as="h2"
-              fontWeight="600"
-            >{`$ ${location.state.productPrice}`}</Typography>
-            <Typography as="h2" fontWeight="600">
-              <s>{`MRP ${location.state.TotalMRP}`}</s>
-            </Typography>
-            <Typography
-              as="h3"
-              color="primary"
-            >{`${location.state.productDiscount}% OFF`}</Typography>
-          </PriceContainer>
+                  <ProductActions
+                     productPrice={product.productPrice}
+                     TotalMRP={product.TotalMRP}
+                     productDiscount={product.productDiscount}
+                  />
 
-          <Typography
-            fontWeight="100"
-            color="primary"
-          >{`Inclusive of all taxes`}</Typography>
+                  <ProductInfo
+                     DeliveryDate={product.DeliveryDate}
+                     SellerName={product.SellerName}
+                     productDetail={product.productDetail}
+                     review={product.review}
+                  />
 
-          <ButtonContainer>
-            <Button width="135px" height="41px" borderRadius="5px">
-              Add To Bag
-            </Button>
-            <Button width="135px" height="41px" border-radius="5px">
-              Whishlist
-            </Button>
-          </ButtonContainer>
-
-          <DeliveryContainer>
-            <LocalShippingIcon style={{ color: "dimgray" }}></LocalShippingIcon>
-            <Typography>{`Deliver By : ${location.state.DeliveryDate}`}</Typography>
-          </DeliveryContainer>
-
-          <Typography>{`Seller : ${location.state.SellerName}`}</Typography>
-
-          <Divider sx={{ marginTop: "10px" }} />
-          <ProductDetailHeadingContainer>
-            <TextSnippetIcon style={{ color: "dimgray" }}></TextSnippetIcon>
-            <Typography as="h4" fontWeight="700">
-              PRODUCT DETAILS
-            </Typography>
-          </ProductDetailHeadingContainer>
-          <Typography gutterBottom="20">
-            {location.state.productDetail}
-          </Typography>
-
-          <Typography color="primary">
-            100% original and handmade product
-          </Typography>
-
-          <Divider sx={{ marginTop: "10px", marginBottom: "10px" }} />
-
-          <Typography as="h5" fontWeight="600">{`Customer Reviews (${
-            location.state.review && location.state.review.length
-          })`}</Typography>
-
-          {location.state.review &&
-            location.state.review.length !== 0 &&
-            location.state.review.map((review) => {
-              return <Reviews review={review} />;
-            })}
-        </ProductDetailContainer>
-      </ProductContainer>
-    </>
-  );
+                  {product.review &&
+                     product.review.length !== 0 &&
+                     product.review.map((review) => {
+                        return <Reviews key={review.id} review={review} />;
+                     })}
+               </ProductDetailContainer>
+            </ProductContainer>
+         )}
+      </>
+   );
 }
