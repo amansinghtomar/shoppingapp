@@ -10,8 +10,12 @@ import image from "../../assets/temp.jpg";
 import Typography from "../Typography/Typography";
 import { FavoriteButton } from "./Cardstyles";
 import DefaultMenuItem from "../MenuItem/DefaultMenuItem";
+import { useSelector } from "react-redux";
+
 
 function ShoppingCard() {
+  const { cartItems } = useSelector((state) => state.cart);
+  console.log("cartItems",cartItems)
   return (
     <ShoppingCardWrapper>
       <ShoppingCardImage src={image} alt="Cart Image" />

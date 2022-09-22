@@ -28,6 +28,7 @@ export default function Card({
    post,
    handleLike,
    handleClickOpen,
+   handleAddToCart
 }) {
    return (
       <CardWrapper>
@@ -70,7 +71,7 @@ export default function Card({
 
                <Typography as="p"> {post.likeCount}</Typography>
             </LikesContainer>
-            <CartButton fontSize="large" />
+            <CartButton onClick ={()=> handleAddToCart(post)} fontSize="large" />
          </CardBottom>
          <CardDetail>
             <Typography as="p" gutterBottom="8">

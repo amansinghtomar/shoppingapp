@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { AuthReducer } from "./authenticationSlice";
 import { PostReducer } from "./userPostSlice";
+import {CartReducer} from'./cartSlice';
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
@@ -9,6 +10,7 @@ import thunk from "redux-thunk";
 const reducers = combineReducers({
    auth: AuthReducer,
    post: PostReducer,
+   cart : CartReducer
 });
 
 const persistConfig = {

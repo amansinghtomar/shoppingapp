@@ -7,12 +7,22 @@ import { useNavigate } from "react-router-dom";
 import NoData from "../../assets/Nodata.svg";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebase";
-import { useDispatch, useSelector } from "react-redux";
 import { addPost } from "../../redux/userPostSlice";
 import { compareobjects } from "../../utils";
 
 function DashboardLeftContainer() {
-   const { handleLike, setAnchorEl, anchorEl, userActionMenuList, open,posts,dispatch } = usePost({
+
+   const {
+      handleLike,
+      setAnchorEl,
+      anchorEl,
+      userActionMenuList,
+      open,
+      posts,
+      dispatch,
+      handleAddToCart,
+      handleClickOpen
+   } = usePost({
       url: "",
    });
 
@@ -33,9 +43,6 @@ function DashboardLeftContainer() {
 
    const router = useNavigate();
 
-   const handleClickOpen = (post) => {
-      router(`/product/${post.id}`, { state: post });
-   };
 
    return (
       <DashboardLeft>
@@ -51,6 +58,7 @@ function DashboardLeftContainer() {
                      handleLike={handleLike}
                      post={post}
                      handleClickOpen={handleClickOpen}
+                     handleAddToCart={handleAddToCart}
                   />
                ))
             ) : (

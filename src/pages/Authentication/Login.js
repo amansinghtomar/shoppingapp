@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState,useRef } from "react";
 import Typography from "../../components/Typography/Typography";
 import {
    Wrapper,
@@ -16,21 +16,35 @@ import Form from "../../components/Form/Form";
 import { useDispatch, useSelector } from "react-redux";
 import { userAuth } from "../../redux/authenticationSlice";
 import { useNavigate } from "react-router-dom";
+import AlertBox from "../../components/Alert/Alert";
 
 export default function Login() {
    const user = useSelector((state) => state.auth);
    const dispatch = useDispatch();
    const route = useNavigate();
+  const timerRef = useRef(null);
+   const [alert, setAlert] = useState({ visible: false, severity: '', message: '' });
 
    useEffect(() => {
       if (user.isAuthenticated) {
          route("/");
       }
+   },[user.isAuthenticated]);
 
-      if (Object.keys(user.error).length > 0) {
-         console.log(user.error.message);
+   useEffect(() => {
+            if (Object.keys(user.error).length > 0) {
+               setAlert({ visible: true, severity: 'error', message: user.error.message }) 
+                        timerRef.current= setTimeout(() => {
+          setAlert({ visible:false,severity:'',message:''})
+        },2000)
       }
-   }, [user.error, user.isAuthenticated]);
+   }, [user.error])
+   
+   useEffect(() => {
+    return () => {
+      clearInterval(timerRef.current);
+    };
+   },[])
 
    const validations = {
       email: function ({ email }) {
@@ -70,8 +84,9 @@ export default function Login() {
       },
    ];
    return (
-      <Wrapper>        
+      <Wrapper>  
          <SignInContent>
+            <AlertBox visible={alert.visible} severity={alert.severity} message={alert.message}/>
             <SignInTop>
                <Form
                   formTitle="Login"
