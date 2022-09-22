@@ -52,7 +52,7 @@ export default function Login() {
    const handleSignin = () => {
       value.method = "signin";
       dispatch(userAuth(value));
-      reset();
+       reset();
    };
 
    const signinInput = [
@@ -69,9 +69,8 @@ export default function Login() {
          value: value.password,
       },
    ];
-
    return (
-      <Wrapper>
+      <Wrapper>        
          <SignInContent>
             <SignInTop>
                <Form
@@ -84,6 +83,7 @@ export default function Login() {
                   actionButtonTitle="Login"
                   isValid={isValid}
                   handleActionButton={handleSignin}
+                  loading={user.loading}       
                />
             </SignInTop>
             <SignInBottom>

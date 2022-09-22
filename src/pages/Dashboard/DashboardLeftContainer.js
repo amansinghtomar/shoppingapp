@@ -12,12 +12,10 @@ import { addPost } from "../../redux/userPostSlice";
 import { compareobjects } from "../../utils";
 
 function DashboardLeftContainer() {
-   const { handleLike, setAnchorEl, anchorEl, userActionMenuList, open } = usePost({
+   const { handleLike, setAnchorEl, anchorEl, userActionMenuList, open,posts,dispatch } = usePost({
       url: "",
    });
 
-   const dispatch = useDispatch();
-   const { loading, posts } = useSelector((state) => state.post);
 
    useEffect(() => {
       const collRef = collection(db, "Posts");

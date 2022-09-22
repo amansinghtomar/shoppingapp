@@ -3,6 +3,7 @@ import { Button } from "../Button/Button";
 import Typography from "../Typography/Typography";
 import { FormActionButton } from "./FormStyles";
 import InputContainer from "./InputContainer";
+import BackDrop from "../Backdrop/BackDrop";
 
 function Form({
   formTitle,
@@ -14,6 +15,7 @@ function Form({
   actionButtonTitle,
   handleActionButton,
   isValid,
+  loading,
 }) {
   return (
     <>
@@ -37,6 +39,7 @@ function Form({
           {actionButtonTitle}
         </Button>
       </FormActionButton>
+      <BackDrop loading={loading } />
     </>
   );
 }
