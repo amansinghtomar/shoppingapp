@@ -2,9 +2,10 @@ import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import Empty from "../components/Empty/Empty";
 import NoData from "../assets/Nodata.svg";
+import { useSelector } from "react-redux";
 
 function PrivateRoutes({ role }) {
-   const auth = false;
+   const auth = useSelector((state) => state.auth.isAuthenticated);
    const router = useNavigate();
    return auth ? (
       <Outlet />

@@ -1,4 +1,4 @@
-import React, { useEffect,useState,useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Typography from "../../components/Typography/Typography";
 import {
    Wrapper,
@@ -22,29 +22,29 @@ export default function Login() {
    const user = useSelector((state) => state.auth);
    const dispatch = useDispatch();
    const route = useNavigate();
-  const timerRef = useRef(null);
-   const [alert, setAlert] = useState({ visible: false, severity: '', message: '' });
+   const timerRef = useRef(null);
+   const [alert, setAlert] = useState({ visible: false, severity: "", message: "" });
 
    useEffect(() => {
       if (user.isAuthenticated) {
          route("/");
       }
-   },[user.isAuthenticated]);
+   }, [user.isAuthenticated]);
 
    useEffect(() => {
-            if (Object.keys(user.error).length > 0) {
-               setAlert({ visible: true, severity: 'error', message: user.error.message }) 
-                        timerRef.current= setTimeout(() => {
-          setAlert({ visible:false,severity:'',message:''})
-        },2000)
+      if (Object.keys(user.error).length > 0) {
+         setAlert({ visible: true, severity: "error", message: user.error.message });
+         timerRef.current = setTimeout(() => {
+            setAlert({ visible: false, severity: "", message: "" });
+         }, 2000);
       }
-   }, [user.error])
-   
+   }, [user.error]);
+
    useEffect(() => {
-    return () => {
-      clearInterval(timerRef.current);
-    };
-   },[])
+      return () => {
+         clearInterval(timerRef.current);
+      };
+   }, []);
 
    const validations = {
       email: function ({ email }) {
@@ -66,7 +66,7 @@ export default function Login() {
    const handleSignin = () => {
       value.method = "signin";
       dispatch(userAuth(value));
-       reset();
+      reset();
    };
 
    const signinInput = [
@@ -84,9 +84,9 @@ export default function Login() {
       },
    ];
    return (
-      <Wrapper>  
+      <Wrapper>
          <SignInContent>
-            <AlertBox visible={alert.visible} severity={alert.severity} message={alert.message}/>
+            <AlertBox visible={alert.visible} severity={alert.severity} message={alert.message} />
             <SignInTop>
                <Form
                   formTitle="Login"
@@ -98,7 +98,7 @@ export default function Login() {
                   actionButtonTitle="Login"
                   isValid={isValid}
                   handleActionButton={handleSignin}
-                  loading={user.loading}       
+                  loading={user.loading}
                />
             </SignInTop>
             <SignInBottom>
