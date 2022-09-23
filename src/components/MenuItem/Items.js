@@ -1,15 +1,37 @@
 import * as React from "react";
+//MUI library
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+//MUI Icons
+import Tooltip from "@mui/material/Tooltip";
+import IconButton from "@mui/material/IconButton";
+import Avatar from "@mui/material/Avatar";
+//Custom CSS
+import {UserActionIcon} from '../Card/Cardstyles'
 
-function Items({ anchorEl, open, handleClose, menuList }) {
+function Items({type, menuList }) {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
   return (
-    <Menu
+    <>
+      {type === "Account settings" ? 
+       <Tooltip title="Account settings">
+            <IconButton onClick={(event) => setAnchorEl(event.currentTarget)} size="small">
+               <Avatar sx={{ width: 30, height: 30 }}>M</Avatar>
+            </IconButton>
+        </Tooltip>
+        : 
+            <UserActionIcon
+               onClick={(event) => setAnchorEl(event.currentTarget)}
+               color="action"
+            />
+      }     
+       <Menu
       anchorEl={anchorEl}
       id="account-menu"
       open={open}
-      onClose={handleClose}
-      onClick={handleClose}
+      onClose={() => setAnchorEl(null)}
+      onClick={() => setAnchorEl(null)}
       PaperProps={{
         elevation: 0,
         sx: {
@@ -47,6 +69,8 @@ function Items({ anchorEl, open, handleClose, menuList }) {
           </MenuItem>
         ))}
     </Menu>
+    </>
+   
   );
 }
 export default Items;

@@ -84,11 +84,7 @@ export default function Navbar({ isAuthenticated }) {
 
    const checkAuthentication = () => {
       return isAuthenticated ? (
-         <Tooltip title="Account settings">
-            <IconButton onClick={(event) => setAnchorEl(event.currentTarget)} size="small">
-               <Avatar sx={{ width: 30, height: 30 }}>M</Avatar>
-            </IconButton>
-         </Tooltip>
+      ""
       ) : (
          <NavLink to={"login"}>
             <LoginIcon />
@@ -116,11 +112,9 @@ export default function Navbar({ isAuthenticated }) {
                   </NavLink>
                </NavList>
                <NavList>{checkAuthentication()}</NavList>
-               <Items
-                  anchorEl={anchorEl}
-                  open={open}
-                  handleClose={() => setAnchorEl(null)}
+               <Items    
                   menuList={menuList}
+                  type="Account settings"
                />
             </NavUl>
          </NavListConatiner>

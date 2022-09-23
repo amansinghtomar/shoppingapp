@@ -1,14 +1,18 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addPost } from "../redux/userPostSlice";
+import { useNavigate } from "react-router-dom";
+
+//firebase
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import { useNavigate } from "react-router-dom";
-import {addToCart} from '../redux/cartSlice'
-
+//Reducer
+import { addToCart } from '../redux/cartSlice'
+import { addPost } from "../redux/userPostSlice";
 
 export default function usePost() {
    const [anchorEl, setAnchorEl] = React.useState(null);
+   const [alert, setAlert] = React.useState({ visible: false, severity: "", message: "" ,open:false  });
+   const timerRef = React.useRef(null);
    const open = Boolean(anchorEl);
    const { posts } = useSelector((state) => state.post);
    const dispatch = useDispatch();
@@ -28,7 +32,11 @@ export default function usePost() {
    };
 
    const handleAddToCart = (post) => {
-        dispatch(addToCart(post));
+      setAlert({ visible: true, severity: "success", message: "Product added successfully",open:true });
+      timerRef.current = setTimeout(() => {
+            setAlert({ visible: false, severity: "", message: "" });
+         }, 2000);
+      dispatch(addToCart(post));
    }
 
 
@@ -60,6 +68,7 @@ export default function usePost() {
       userActionMenuList,
       open,
       handleClickOpen,
-      handleAddToCart
+      handleAddToCart,
+      alert
    };
 }

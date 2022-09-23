@@ -28,6 +28,7 @@ function DashboardLeftContainer() {
       dispatch,
       handleAddToCart,
       handleClickOpen,
+      alert
    } = usePost({
       url: "",
    });
@@ -49,7 +50,7 @@ function DashboardLeftContainer() {
    const router = useNavigate();
 
    return (
-      <DashboardLeft>
+         <DashboardLeft>
          <CardContainer>
             {posts.length > 0 && posts ? (
                posts.map((post) => (
@@ -63,6 +64,7 @@ function DashboardLeftContainer() {
                      post={post}
                      handleClickOpen={handleClickOpen}
                      handleAddToCart={handleAddToCart}
+                     alert = {alert}
                   />
                ))
             ) : (
@@ -76,7 +78,7 @@ function DashboardLeftContainer() {
                />
             )}
          </CardContainer>
-      </DashboardLeft>
+      </DashboardLeft>      
    );
 }
 

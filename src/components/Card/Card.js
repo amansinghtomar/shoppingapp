@@ -1,5 +1,5 @@
-import Typography from "../Typography/Typography";
 import React from "react";
+//Custom CSS
 import {
    CardBottom,
    CardDetail,
@@ -9,28 +9,29 @@ import {
    ContentImage,
    FavoriteButton,
    LikesContainer,
-   UserActionIcon,
    UserDetail,
    UserImage,
    UserInfo,
    FavoriteButtonRed,
-   CustomLink,
+   CustomLink, 
 } from "./Cardstyles";
+//Custom Component
+import Typography from "../Typography/Typography";
 import { Button } from "../Button/Button";
 import Items from "../MenuItem/Items";
+import AlertBox from "../Alert/Alert";
 
 export default function Card({
-   userAction,
-   handleUserAction,
    menuList,
-   anchorEl,
    post,
    handleLike,
    handleClickOpen,
-   handleAddToCart
+   handleAddToCart,
+   alert
 }) {
    return (
       <CardWrapper>
+           <AlertBox  visible={alert.visible} severity={alert.severity} message={alert.message} open={alert.open} />     
          <CardTop>
             <UserDetail>
                <UserImage />
@@ -45,15 +46,9 @@ export default function Card({
                   </Typography>
                </UserInfo>
             </UserDetail>
-            <UserActionIcon
-               onClick={(event) => handleUserAction(event.currentTarget)}
-               color="action"
-            />
             <Items
-               anchorEl={anchorEl}
-               open={userAction}
-               handleClose={() => handleUserAction(null)}
                menuList={menuList}
+                type="UserActionIcon"
             />
          </CardTop>
          <ContentImage src={post.image} />
