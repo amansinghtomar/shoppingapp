@@ -17,7 +17,6 @@ import {
    CustomLink,
 } from "./Cardstyles";
 import { Button } from "../Button/Button";
-import image from "../../assets/temp.jpg";
 import Items from "../MenuItem/Items";
 
 export default function Card({
