@@ -12,7 +12,7 @@ import { FavoriteButton } from "./Cardstyles";
 import DefaultMenuItem from "../MenuItem/DefaultMenuItem";
 import { useSelector } from "react-redux";
 
-function ShoppingCard({ SellerName, productName, productPrice, DeliveryDate }) {
+function ShoppingCard({ SellerName, productName, productPrice, DeliveryDate, quantity }) {
    return (
       <ShoppingCardWrapper>
          <ShoppingCardImage src={image} alt="Cart Image" />
@@ -28,11 +28,11 @@ function ShoppingCard({ SellerName, productName, productPrice, DeliveryDate }) {
             </div>
 
             <Typography as="h5" fontWeight="500">
-               {`$`}
+               {`$${productPrice}`}
             </Typography>
-            <DefaultMenuItem />
+            <DefaultMenuItem quantity={quantity} />
             <Typography as="p" fontSize="12px" fontWeight="300">
-               Delivery by 5 Sept
+               {`Delivery by ${DeliveryDate}`}
             </Typography>
          </ShoppingCardInfo>
          <ShoppingCardAction>

@@ -3,6 +3,12 @@ import { current } from "@reduxjs/toolkit";
 
 const initialState = {
    cartItems: [],
+   cartTotal: {
+      price: "",
+      discount: "",
+      couponDiscount: "",
+      deliveryCharge: "",
+   },
 };
 
 const CartSlice = createSlice({

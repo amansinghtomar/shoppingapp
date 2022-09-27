@@ -4,8 +4,7 @@ import { addPost } from "../redux/userPostSlice";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useNavigate } from "react-router-dom";
-import {addToCart} from '../redux/cartSlice'
-
+import { addToCart } from "../redux/cartSlice";
 
 export default function usePost() {
    const [anchorEl, setAnchorEl] = React.useState(null);
@@ -23,30 +22,31 @@ export default function usePost() {
    ];
    const router = useNavigate();
 
-    const handleClickOpen = (post) => {
+   const handleClickOpen = (post) => {
       router(`/product/${post.id}`, { state: post });
    };
 
    const handleAddToCart = (post) => {
-        dispatch(addToCart(post));
-   }
-
+      dispatch(addToCart({ ...post, quantity: 10 }));
+   };
 
    const handleLike = async (id, like) => {
       if (like === undefined) return null;
       let tempPosts = JSON.parse(JSON.stringify(posts));
-      const newPostList =  tempPosts.filter( async (post) => {
+      const newPostList = tempPosts.filter(async (post) => {
          if (post.id === id) {
             post.like = !post.like;
-            post.likeCount ? (post.likeCount = post.likeCount - 1) : (post.likeCount = post.likeCount + 1);
+            post.likeCount
+               ? (post.likeCount = post.likeCount - 1)
+               : (post.likeCount = post.likeCount + 1);
 
             const likePostRef = doc(db, "Posts", id);
             await updateDoc(likePostRef, {
-            like: post.like,
-            likeCount :  post.likeCount
-         });
+               like: post.like,
+               likeCount: post.likeCount,
+            });
          }
-            return post;
+         return post;
       });
       dispatch(addPost(newPostList));
    };
@@ -60,6 +60,6 @@ export default function usePost() {
       userActionMenuList,
       open,
       handleClickOpen,
-      handleAddToCart
+      handleAddToCart,
    };
 }
