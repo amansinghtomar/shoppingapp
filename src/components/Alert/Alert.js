@@ -8,7 +8,7 @@ export default function AlertBox({ visible, severity, message, open }) {
         <Snackbar open={open} autoHideDuration={6000} 
             anchorOrigin={{
                 vertical: "top",
-                horizontal: "top"
+                horizontal: "center"
             }} >
             {visible &&
                     <Alert severity={severity} >

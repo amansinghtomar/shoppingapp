@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 //Reducer
-import { addToCart } from '../redux/cartSlice'
+import { addCartItems } from '../redux/cartSlice'
 import { addPost } from "../redux/userPostSlice";
 
 export default function usePost() {
@@ -15,6 +15,7 @@ export default function usePost() {
    const timerRef = React.useRef(null);
    const open = Boolean(anchorEl);
    const { posts } = useSelector((state) => state.post);
+   const { userInfo } = useSelector((state) => state.auth);
    const dispatch = useDispatch();
 
    const addToWishList = () => {};
@@ -35,8 +36,8 @@ export default function usePost() {
       setAlert({ visible: true, severity: "success", message: "Product added successfully",open:true });
       timerRef.current = setTimeout(() => {
             setAlert({ visible: false, severity: "", message: "" });
-         }, 2000);
-      dispatch(addToCart(post));
+      }, 2000);
+      dispatch(addCartItems([post,userInfo.uid]));
    }
 
 
