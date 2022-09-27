@@ -6,8 +6,14 @@ import { doc, updateDoc } from "firebase/firestore";
 
 const initialState = {
    cartItems: [],
-   cartError: {},
-   cartloading : false
+     cartError: {},
+   cartloading: false,
+     cartTotal: {
+      price: "",
+      discount: "",
+      couponDiscount: "",
+      deliveryCharge: "",
+   },
 };
 
 export const addCartItems = createAsyncThunk("cart", async (value,{getState}) => {

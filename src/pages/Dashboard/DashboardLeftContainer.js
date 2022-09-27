@@ -9,7 +9,7 @@ import NoData from "../../assets/Nodata.svg";
 
 //External Libraries
 import { db } from "../../firebase";
-import { collection, onSnapshot } from "firebase/firestore";
+import { addDoc, collection, onSnapshot } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 //Custom Stuff
