@@ -19,7 +19,6 @@ import {
 import Typography from "../Typography/Typography";
 import { Button } from "../Button/Button";
 import Items from "../MenuItem/Items";
-import AlertBox from "../Alert/Alert";
 
 export default function Card({
    menuList,
@@ -31,7 +30,6 @@ export default function Card({
 }) {
    return (
       <CardWrapper>
-           <AlertBox  visible={alert.visible} severity={alert.severity} message={alert.message} open={alert.open} />     
          <CardTop>
             <UserDetail>
                <UserImage />
@@ -65,7 +63,6 @@ export default function Card({
 
                <Typography as="p"> {post.likeCount}</Typography>
             </LikesContainer>
-            <CartButton onClick ={()=> handleAddToCart(post)} fontSize="large" />
          </CardBottom>
          <CardDetail>
             <Typography as="p" gutterBottom="8">

@@ -1,21 +1,40 @@
+//React & other library 
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useDispatch,useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+//Custom CSS 
 import {
    ImageWrapper,
    Image,
    ProductContainer,
    ProductDetailContainer,
 } from "./ProductDetailStyle";
+//firebase
+import { db } from "../../firebase";
+import { collection, getDocs, query, where } from "firebase/firestore";
+//Redux
+import { addCartItems } from "../../redux/cartSlice";
+//Custom Component
 import Reviews from "./Reviews";
 import { ProductHeader, ProductActions, ProductInfo } from "./ProductInfo";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "../../firebase";
-import { useSelector } from "react-redux";
+import AlertBox from "../../components/Alert/Alert";
+
 
 export default function ProductDetails() {
    const location = useLocation();
    const [product, setProduct] = useState({});
    const { posts } = useSelector((state) => state.post);
+   const dispatch = useDispatch();
+   const [alert, setAlert] = React.useState({
+      visible: false,
+      severity: "",
+      message: "",
+      open: false,
+   });
+   const timerRef = React.useRef(null);
+   const updateTextAddToBag = location.state
+   const router = useNavigate();
 
    useEffect(() => {
       const { pathname } = location;
@@ -38,8 +57,27 @@ export default function ProductDetails() {
       });
    };
 
+   const handleGoToCart = () => {
+      console.log("handleGoToCart")
+        router(`/cart`);
+   }
+
+   const handleAddToCart = () => {
+      setAlert({
+         visible: true,
+         severity: "success",
+         message: "Product added successfully",
+         open: true,
+      });
+      timerRef.current = setTimeout(() => {
+         setAlert({ visible: false, severity: "", message: "" });
+      }, 2000);
+      dispatch(addCartItems({ ...product, quantity: 10 }));
+   };
+
    return (
       <>
+      <AlertBox  visible={alert.visible} severity={alert.severity} message={alert.message} open={alert.open} />     
          {Object.keys(product).length > 0 && (
             <ProductContainer>
                <ImageWrapper>
@@ -57,6 +95,9 @@ export default function ProductDetails() {
                      productPrice={product.productPrice}
                      TotalMRP={product.TotalMRP}
                      productDiscount={product.productDiscount}
+                     handleAddToCart={handleAddToCart}
+                     updateTextAddToBag={updateTextAddToBag}
+                     handleGoToCart={handleGoToCart}
                   />
 
                   <ProductInfo

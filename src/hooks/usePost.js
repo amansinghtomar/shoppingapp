@@ -22,7 +22,8 @@ export default function usePost() {
    const { posts } = useSelector((state) => state.post);
    const { userInfo } = useSelector((state) => state.auth);
    const dispatch = useDispatch();
-
+   const { cartItems } = useSelector((state) => state.cart);
+   
    const addToWishList = () => {};
 
    const userActionMenuList = [
@@ -34,7 +35,8 @@ export default function usePost() {
    const router = useNavigate();
 
    const handleClickOpen = (post) => {
-      router(`/product/${post.id}`, { state: post });
+      const updateTextAddToBag = cartItems.find(item => post.id === item.id)
+      router(`/product/${post.id}`, { state: updateTextAddToBag });
    };
 
    const handleAddToCart = (post) => {

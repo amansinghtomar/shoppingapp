@@ -31,7 +31,7 @@ export const ProductHeader = ({ productName, review, star }) => (
    </>
 );
 
-export const ProductActions = ({ productPrice, TotalMRP, productDiscount }) => (
+export const ProductActions = ({ productPrice, TotalMRP, productDiscount,handleAddToCart,updateTextAddToBag,handleGoToCart}) => (
    <>
       <PriceContainer>
          <Typography as="h2" fontWeight="600">{`$ ${productPrice}`}</Typography>
@@ -43,9 +43,15 @@ export const ProductActions = ({ productPrice, TotalMRP, productDiscount }) => (
       <Typography fontWeight="100" color="primary">{`Inclusive of all taxes`}</Typography>
 
       <ButtonContainer>
-         <Button width="135px" height="41px" borderRadius="5px">
-            Add To Bag
+         {updateTextAddToBag === null ? 
+         <Button width="135px" height="41px" borderRadius="5px" fontSize="large"  onClick ={()=> handleAddToCart("Go to Bag")}>
+          Add to Bag
+            </Button> :
+            <Button width="135px" height="41px" borderRadius="5px" fontSize="large"  onClick ={()=> handleGoToCart("Go to Bag")}>
+          Go to Bag
          </Button>
+      }
+         
          <Button width="135px" height="41px" border-radius="5px">
             Whishlist
          </Button>

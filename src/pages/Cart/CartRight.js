@@ -12,10 +12,12 @@ import {
 import { Divider } from "@mui/material";
 import { priceDetails } from "./priceConfig";
 import { useSelector } from "react-redux";
-
+import DialogBox from '../../components/Dialog/DialogBox'
 function CartRight() {
    const cartItems = useSelector((state) => state.cart.cartItems);
    const [priceValue, setPriceValue] = useState(priceDetails);
+   const [openApplyCoupons, setOpenApplyCoupons] = React.useState(false);
+
 
    useEffect(() => {
       const newPrice = JSON.parse(JSON.stringify(priceValue));
@@ -31,13 +33,26 @@ function CartRight() {
       setPriceValue(newPrice);
    }, [cartItems]);
 
+   const handleClickOpen = () => {
+      setOpenApplyCoupons(true);
+   }
+
+   const handleClose = () => {
+        console.log("handleClose")
+    setOpenApplyCoupons(false);
+   };
+   
+
+
    return (
       <CartRightContainer>
          <CoupnContainer>
             <Typography as="h4" fontWeight="500">
                Apply Coupons
             </Typography>
-            <Button width="150px">Apply</Button>
+            <Button width="150px"  onClick={handleClickOpen}>Apply
+            </Button>
+           {openApplyCoupons && <DialogBox open={openApplyCoupons} handleClose={handleClose} />} 
          </CoupnContainer>
          <PriceContainer>
             <Typography as="h4" fontWeight="450">
