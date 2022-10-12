@@ -6,13 +6,21 @@ import {
    ShoppingCardInfo,
    ShoppingCardWrapper,
 } from "./ShoppingStyles";
-import image from "../../assets/temp.jpg";
 import Typography from "../Typography/Typography";
 import { FavoriteButton } from "./Cardstyles";
 import DefaultMenuItem from "../MenuItem/DefaultMenuItem";
-import { useSelector } from "react-redux";
 
-function ShoppingCard({ SellerName, productName, productPrice, DeliveryDate, quantity }) {
+function ShoppingCard({
+   SellerName,
+   productName,
+   productPrice,
+   DeliveryDate,
+   quantity,
+   id,
+   handleRemoveItem,
+   image,
+   handleUpdateItem,
+}) {
    return (
       <ShoppingCardWrapper>
          <ShoppingCardImage src={image} alt="Cart Image" />
@@ -30,14 +38,14 @@ function ShoppingCard({ SellerName, productName, productPrice, DeliveryDate, qua
             <Typography as="h5" fontWeight="500">
                {`$${productPrice}`}
             </Typography>
-            <DefaultMenuItem quantity={quantity} />
+            <DefaultMenuItem quantity={quantity} handleUpdateItem={handleUpdateItem} id={id} />
             <Typography as="p" fontSize="12px" fontWeight="300">
                {`Delivery by ${DeliveryDate}`}
             </Typography>
          </ShoppingCardInfo>
          <ShoppingCardAction>
             <FavoriteButton fontSize="large" />
-            <DeleteButton fontSize="large" />
+            <DeleteButton fontSize="large" onClick={() => handleRemoveItem(id)} />
          </ShoppingCardAction>
       </ShoppingCardWrapper>
    );

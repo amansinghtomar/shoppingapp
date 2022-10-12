@@ -14,9 +14,10 @@ import useInput from "../../hooks/useInput";
 import { emailValidate, passwordValidator } from "../../utils";
 import Form from "../../components/Form/Form";
 import { useDispatch, useSelector } from "react-redux";
-import { userAuth } from "../../redux/authenticationSlice";
+import { googleSignIn, userSignIn } from "../../redux/authenticationSlice";
 import { useNavigate } from "react-router-dom";
 import AlertBox from "../../components/Alert/Alert";
+import GoogleLogo from "../../assets/google.svg";
 
 export default function Login() {
    const user = useSelector((state) => state.auth);
@@ -65,7 +66,7 @@ export default function Login() {
 
    const handleSignin = () => {
       value.method = "signin";
-      dispatch(userAuth(value));
+      dispatch(userSignIn(value));
       reset();
    };
 
@@ -106,7 +107,10 @@ export default function Login() {
                   OR
                </Typography>
                <GoogleSignIn>
-                  <Button>Google Signin</Button>
+                  <Button variant="secondary" onClick={() => dispatch(googleSignIn())}>
+                     {<img src={GoogleLogo} height="30px" />}
+                     Continue with Google
+                  </Button>
                </GoogleSignIn>
                <LoginLinkWrapper>
                   <StyledLink to="/signup">New Customer? Signup</StyledLink>

@@ -1,14 +1,14 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { current } from "@reduxjs/toolkit";
 import { db } from "../firebase";
 import { doc, updateDoc } from "firebase/firestore";
-
+import { async } from "@firebase/util";
 
 const initialState = {
    cartItems: [],
-     cartError: {},
+   cartError: {},
    cartloading: false,
-     cartTotal: {
+   cartTotal: {
       price: "",
       discount: "",
       couponDiscount: "",
@@ -16,56 +16,79 @@ const initialState = {
    },
 };
 
-export const addCartItems = createAsyncThunk("cart", async (value,{getState}) => {
-   console.log("value ",value)
-   const state = getState()
- console.log("state", state)
+export const addCartItems = createAsyncThunk("cart", async (value, { getState }) => {
+   const state = getState();
+   console.log(state.auth.userInfo.uid);
+   const docRef = doc(db, "Users", state.auth.userInfo.uid);
+   await updateDoc(docRef, {
+      cart: [...state.cart.cartItems, value],
+   });
+   return value;
+});
 
-   const docRef = doc(db, "Users", value[1]);
-   console.log("docRef", docRef)
-   
-   try {
-        await updateDoc(docRef, {
-   cart: [...state.cart.cartItems, value[0]]
-   })
-   }catch(error) {
-      console.log(error,"error")
-   }
- 
-   return value[0]   
-   
-})
+export const removeCartItems = createAsyncThunk("removeCart", async (value, { getState }) => {
+   const state = getState();
+   const docRef = doc(db, "Users", state.auth.userInfo.uid);
+   const updatedCart = state.cart.cartItems.filter((item) => item.id !== value);
+   console.log("updatedCart", updatedCart, value);
+   await updateDoc(docRef, {
+      cart: updatedCart,
+   });
+   return updatedCart;
+});
+
+export const updateCartItems = createAsyncThunk("updateCart", async (value, { getState }) => {
+   const state = getState();
+   const docRef = doc(db, "Users", state.auth.userInfo.uid);
+   const cartValue = JSON.parse(JSON.stringify(state.cart.cartItems));
+   const updatedCart = cartValue.map((item) => {
+      if (item.id === value.id) {
+         item.quantity = value.quantity;
+      }
+      return item;
+   });
+   await updateDoc(docRef, {
+      cart: updatedCart,
+   });
+   return updatedCart;
+});
 
 const CartSlice = createSlice({
    name: "cartItems",
    initialState,
    reducers: {
-      // addToCart: (state, action) => {
-      //    state.cartItems = [...current(state).cartItems, action.payload];
-      // },
+      initiateCart: (state, action) => {
+         state.cartItems = action.payload;
+      },
    },
-   extraReducers: (builder) => {  
-      builder.addCase(addCartItems.pending, (state) => {
-         state.cartloading = true;
-      });
+   extraReducers: (builder) => {
       builder.addCase(addCartItems.fulfilled, (state, action) => {
-         console.log("action.payload", action.payload, current(state).cartItems)
-         let temp = JSON.parse(JSON.stringify(current(state).cartItems)) 
-         console.log(" initial temp ",temp ) 
-        temp.push(action.payload)
-         state.cartItems = temp
-         state.cartloading = false;
-         state.cartError = "";
-        
+         state.cartItems = [...current(state).cartItems, action.payload];
       });
-      builder.addCase(addCartItems.rejected, (state, action) => {
-         state.cartloading = false;
-         state.cartItems = [];
-         state.cartError = action.error;
-      });
+      builder.addMatcher(
+         isAnyOf(addCartItems.pending, removeCartItems.pending, updateCartItems.pending),
+         (state) => {
+            state.cartloading = true;
+         }
+      );
+      builder.addMatcher(
+         isAnyOf(removeCartItems.fulfilled, updateCartItems.fulfilled),
+         (state, action) => {
+            state.cartItems = action.payload;
+            state.cartloading = false;
+            state.cartError = "";
+         }
+      );
+      builder.addMatcher(
+         isAnyOf(addCartItems.rejected, removeCartItems.rejected, updateCartItems.rejected),
+         (state, action) => {
+            state.cartloading = false;
+            state.cartError = action.error;
+         }
+      );
    },
 });
 
-//export const { addToCart } = CartSlice.actions;
+export const { initiateCart } = CartSlice.actions;
 
 export const CartReducer = CartSlice.reducer;

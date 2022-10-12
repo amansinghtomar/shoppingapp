@@ -2,26 +2,28 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-
 //firebase
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 //Reducer
-import { addCartItems } from '../redux/cartSlice'
+import { addCartItems } from "../redux/cartSlice";
 import { addPost } from "../redux/userPostSlice";
-
-
 
 export default function usePost() {
    const [anchorEl, setAnchorEl] = React.useState(null);
-   const [alert, setAlert] = React.useState({ visible: false, severity: "", message: "", open: false });
+   const [alert, setAlert] = React.useState({
+      visible: false,
+      severity: "",
+      message: "",
+      open: false,
+   });
    const timerRef = React.useRef(null);
    const open = Boolean(anchorEl);
    const { posts } = useSelector((state) => state.post);
    const { userInfo } = useSelector((state) => state.auth);
    const dispatch = useDispatch();
 
-   const addToWishList = () => { };
+   const addToWishList = () => {};
 
    const userActionMenuList = [
       {
@@ -36,14 +38,17 @@ export default function usePost() {
    };
 
    const handleAddToCart = (post) => {
-
-      setAlert({ visible: true, severity: "success", message: "Product added successfully", open: true });
+      setAlert({
+         visible: true,
+         severity: "success",
+         message: "Product added successfully",
+         open: true,
+      });
       timerRef.current = setTimeout(() => {
          setAlert({ visible: false, severity: "", message: "" });
       }, 2000);
-      dispatch(addCartItems([post, userInfo.uid]));
-   }
-
+      dispatch(addCartItems({ ...post, quantity: 10 }));
+   };
 
    const handleLike = async (id, like) => {
       if (like === undefined) return null;
@@ -76,7 +81,6 @@ export default function usePost() {
       open,
       handleClickOpen,
       handleAddToCart,
-      alert
-
+      alert,
    };
 }

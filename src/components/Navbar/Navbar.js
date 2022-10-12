@@ -79,12 +79,9 @@ export default function Navbar({ isAuthenticated }) {
       },
    ];
 
-   const [anchorEl, setAnchorEl] = React.useState(null);
-   const open = Boolean(anchorEl);
-
    const checkAuthentication = () => {
       return isAuthenticated ? (
-      ""
+         <Items menuList={menuList} type="Account settings" />
       ) : (
          <NavLink to={"login"}>
             <LoginIcon />
@@ -112,10 +109,6 @@ export default function Navbar({ isAuthenticated }) {
                   </NavLink>
                </NavList>
                <NavList>{checkAuthentication()}</NavList>
-               <Items    
-                  menuList={menuList}
-                  type="Account settings"
-               />
             </NavUl>
          </NavListConatiner>
       </NavbarContainer>

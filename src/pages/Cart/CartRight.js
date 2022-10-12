@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Typography from "../../components/Typography/Typography";
 import { Button } from "../../components/Button/Button";
 import {
@@ -10,42 +10,27 @@ import {
    PriceInfo,
 } from "./CartStyles";
 import { Divider } from "@mui/material";
-
-const priceDetails = [
-   {
-      id: 1,
-      name: "Price",
-      price: "64",
-      divider: false,
-   },
-   {
-      id: 2,
-      name: "Discount",
-      price: "100",
-      divider: false,
-   },
-   {
-      id: 3,
-      name: "Coupons Discount",
-      price: "150",
-      divider: false,
-   },
-   {
-      id: 4,
-      name: "Delivery Charge",
-      price: "50",
-      divider: true,
-   },
-
-   {
-      id: 5,
-      name: "Total Amount",
-      price: "1500",
-      divider: false,
-   },
-];
+import { priceDetails } from "./priceConfig";
+import { useSelector } from "react-redux";
 
 function CartRight() {
+   const cartItems = useSelector((state) => state.cart.cartItems);
+   const [priceValue, setPriceValue] = useState(priceDetails);
+
+   useEffect(() => {
+      const newPrice = JSON.parse(JSON.stringify(priceValue));
+      console.log(cartItems);
+      newPrice[0].price = 0;
+      newPrice[1].price = 0;
+      cartItems.forEach((item) => {
+         newPrice[0].price += (item.productPrice * item.quantity) / 10;
+         newPrice[1].price += (item.productDiscount * item.quantity) / 10;
+      });
+      console.log(newPrice);
+      newPrice[4].price = newPrice[0].price - newPrice[1].price;
+      setPriceValue(newPrice);
+   }, [cartItems]);
+
    return (
       <CartRightContainer>
          <CoupnContainer>
@@ -60,17 +45,18 @@ function CartRight() {
             </Typography>
             <Divider style={{ marginTop: "6px" }} />
             <PriceDetails>
-               {priceDetails.map((priceDetail) => (
-                  <div key={priceDetail.id}>
-                     <PriceInfo>
-                        <Typography as="h4" fontWeight="450">
-                           {priceDetail.name}
-                        </Typography>
-                        <Typography>${priceDetail.price}</Typography>
-                     </PriceInfo>
-                     {priceDetail.divider && <Divider style={{ marginTop: "6px" }} />}
-                  </div>
-               ))}
+               {priceValue &&
+                  priceValue.map((priceDetail) => (
+                     <div key={priceDetail.id}>
+                        <PriceInfo>
+                           <Typography as="h4" fontWeight="450">
+                              {priceDetail.name}
+                           </Typography>
+                           <Typography>${priceDetail.price}</Typography>
+                        </PriceInfo>
+                        {priceDetail.divider && <Divider style={{ marginTop: "6px" }} />}
+                     </div>
+                  ))}
             </PriceDetails>
          </PriceContainer>
          <PlaceOrder>
