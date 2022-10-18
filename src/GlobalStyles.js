@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
 }
 
 body {
-  font-family:  'Open Sans','sans-serif',-apple-system, BlinkMacSystemFont;
+  font-family:  'Roboto', 'sans-serif',-apple-system, BlinkMacSystemFont;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: whitesmoke;
