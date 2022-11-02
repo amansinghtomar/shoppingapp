@@ -13,7 +13,7 @@ import {
    UserImage,
    UserInfo,
    FavoriteButtonRed,
-   CustomLink, 
+   CustomLink,
 } from "./Cardstyles";
 //Custom Component
 import Typography from "../Typography/Typography";
@@ -26,7 +26,7 @@ export default function Card({
    handleLike,
    handleClickOpen,
    handleAddToCart,
-   alert
+   alert,
 }) {
    return (
       <CardWrapper>
@@ -44,10 +44,7 @@ export default function Card({
                   </Typography>
                </UserInfo>
             </UserDetail>
-            <Items
-               menuList={menuList}
-                type="UserActionIcon"
-            />
+            <Items menuList={menuList} type="UserActionIcon" />
          </CardTop>
          <ContentImage src={post.image} />
          <CardBottom>
@@ -69,7 +66,7 @@ export default function Card({
                {post.caption}
             </Typography>
             <Typography hover="true" color="primary">
-               <Button variant="secondary" onClick={() => handleClickOpen(post)}>
+               <Button text fullWidth onClick={() => handleClickOpen(post)}>
                   View Product
                </Button>
             </Typography>

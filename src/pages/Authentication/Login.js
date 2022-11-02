@@ -64,7 +64,8 @@ export default function Login() {
       validations
    );
 
-   const handleSignin = () => {
+   const handleSignin = (event) => {
+      event.preventDefault();
       value.method = "signin";
       dispatch(userSignIn(value));
       reset();
@@ -103,18 +104,24 @@ export default function Login() {
                />
             </SignInTop>
             <SignInBottom>
-               <Typography as="p" textAlign="center">
+               <Typography variant="body1" align="center">
                   OR
                </Typography>
                <GoogleSignIn>
-                  <Button variant="secondary" onClick={() => dispatch(googleSignIn())}>
-                     {<img src={GoogleLogo} height="30px" />}
+                  <Button
+                     fullWidth
+                     rounded
+                     startIcon={GoogleLogo}
+                     color="default"
+                     background="secondary"
+                     onClick={() => dispatch(googleSignIn())}
+                  >
                      Continue with Google
                   </Button>
                </GoogleSignIn>
                <LoginLinkWrapper>
                   <StyledLink to="/signup">New Customer? Signup</StyledLink>
-                  <Typography as="p" hover="true" color="primary">
+                  <Typography variant="body1" hover="true" color="primary">
                      Need help?
                   </Typography>
                </LoginLinkWrapper>

@@ -9,10 +9,12 @@ function Empty({ image, message, btnTitle, handleBtn }) {
       <Wrapper>
          <Container>
             <NoDataImage src={image} alt="No Data Found" />
-            <Typography as="p" textAlign="center" gutterBottom="10">
+            <Typography as="p" align="center" gutterBottom="10">
                {message}
             </Typography>
-            <Button onClick={handleBtn}>{btnTitle}</Button>
+            <Button fullWidth text onClick={handleBtn}>
+               {btnTitle}
+            </Button>
          </Container>
       </Wrapper>
    );

@@ -112,5 +112,5 @@ export const CustomDialog = styled(Dialog)`
 
 export const CustomLink = styled(Link)`
    text-decoration: none;
-   color: ${(props) => props.theme.colors.defaultColor};
+   color: ${(props) => props.theme.colors.default};
 `;

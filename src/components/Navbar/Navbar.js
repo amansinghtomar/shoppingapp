@@ -90,7 +90,9 @@ export default function Navbar({ isAuthenticated }) {
    };
    return (
       <NavbarContainer>
-         <Typography variant="h5">My Art Cart</Typography>
+         <Typography variant="h4">
+            My <span style={{ color: "#08a2ab" }}>Art Cart</span>{" "}
+         </Typography>
          <NavListConatiner className="nav">
             <NavUl>
                <NavList>
