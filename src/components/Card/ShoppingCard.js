@@ -8,7 +8,7 @@ import {
 } from "./ShoppingStyles";
 import Typography from "../Typography/Typography";
 import { FavoriteButton } from "./Cardstyles";
-import DefaultMenuItem from "../MenuItem/DefaultMenuItem";
+import Dropdown from "../MenuItem/Dropdown";
 
 function ShoppingCard({
    SellerName,
@@ -38,7 +38,7 @@ function ShoppingCard({
             <Typography as="h5" fontWeight="500">
                {`$${productPrice}`}
             </Typography>
-            <DefaultMenuItem quantity={quantity} handleUpdateItem={handleUpdateItem} id={id} />
+            <Dropdown quantity={quantity} handleUpdateItem={handleUpdateItem} id={id} />
             <Typography as="p" fontSize="12px" fontWeight="300">
                {`Delivery by ${DeliveryDate}`}
             </Typography>

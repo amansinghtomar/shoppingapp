@@ -5,12 +5,14 @@ export const theme = {
    colors: {
       primary: "#08a2ab",
       secondary: "rgb(255, 255, 255)",
-      default: "#474a4e",
+      default: "#000",
+      black: "#474a4e",
       error: "#FF0000",
       success: "#22bb33",
       disabled: "#dddddd",
       light: "#e7fdfe",
       dark: "#05747a",
+      grey: "#535766",
    },
    boxShadow: {
       light: "rgb(0 0 0 / 24%) 0px 3px 8px",

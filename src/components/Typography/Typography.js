@@ -9,7 +9,7 @@ const fontSize = {
    h5: "1.4rem",
    h6: "1rem",
    body1: "1rem",
-   body2: "1rem",
+   body2: "0.8rem",
 };
 
 const fontWeight = {
@@ -41,6 +41,7 @@ const TypographyStyles = styled.p`
       props.color ? props.theme.colors[props.color] : props.theme.colors.default};
    text-align: ${(props) => props.align && props.align};
    margin-bottom: ${(props) => props.gutterBottom && `${props.gutterBottom}px`};
+   margin: 0;
 
    &:hover {
       cursor: ${(props) => props.hover && "pointer"};

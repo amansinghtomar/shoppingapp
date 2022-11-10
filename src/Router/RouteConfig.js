@@ -4,7 +4,7 @@ export const config = [
    {
       id: 1,
       path: "/",
-      Element: React.lazy(() => import("../pages/Dashboard/Dashboard")),
+      Element: React.lazy(() => import("../pages/Home/Home")),
       role: "user",
    },
    {
@@ -39,8 +39,8 @@ export const config = [
    },
    {
       id: 7,
-      path: "following",
-      Element: React.lazy(() => import("../pages/Following/Following")),
+      path: "category",
+      Element: React.lazy(() => import("../pages/Categories/Category")),
       role: "user",
    },
    {
