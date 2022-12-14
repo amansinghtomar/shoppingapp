@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 export const WishListMainContainer = styled.div`
 	background-color: white;
 	padding: 21px;
