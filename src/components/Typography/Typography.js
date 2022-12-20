@@ -66,7 +66,7 @@ Typography.propTypes = {
 	variant: PropTypes.string.isRequired,
 	align: PropTypes.string,
 	color: PropTypes.string,
-	children: PropTypes.string,
+	children: PropTypes.string || PropTypes.object || PropTypes.array,
 };
 
 export default Typography;

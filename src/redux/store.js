@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { AuthReducer } from './authenticationSlice';
-import { PostReducer } from './userPostSlice';
+import { ProductReducer } from './userPostSlice';
 import { CartReducer } from './cartSlice';
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
@@ -9,7 +9,7 @@ import thunk from 'redux-thunk';
 
 const reducers = combineReducers({
 	auth: AuthReducer,
-	post: PostReducer,
+	post: ProductReducer,
 	cart: CartReducer,
 });
 

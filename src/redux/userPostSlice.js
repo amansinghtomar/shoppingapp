@@ -2,20 +2,20 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
 	loading: true,
-	posts: {},
+	products: {},
 };
 
-const UserPostSlice = createSlice({
-	name: 'userPost',
+const ProductSlice = createSlice({
+	name: 'Products',
 	initialState,
 	reducers: {
-		addPost: (state, action) => {
+		addProduct: (state, action) => {
 			state.loading = false;
-			state.posts = action.payload;
+			state.products = action.payload;
 		},
 	},
 });
 
-export const { addPost } = UserPostSlice.actions;
+export const { addProduct } = ProductSlice.actions;
 
-export const PostReducer = UserPostSlice.reducer;
+export const ProductReducer = ProductSlice.reducer;

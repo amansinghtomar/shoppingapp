@@ -1,17 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Wrapper, Image } from './HomeStyles';
 import image from '../../assets/banner.jpg';
 import Category from '../../components/Category/Category';
 import Typography from '../../components/Typography/Typography';
-import { CategoryItem, Config, productItems } from './config';
 import { useNavigate } from 'react-router-dom';
 import ProductCard from '../../components/Card/ProductCard';
+import { collection, onSnapshot } from 'firebase/firestore';
+import { db } from '../../firebase';
 
 function Home() {
 	const route = useNavigate();
-	const navigate = (id) => {
-		route(id);
-	};
+	//const dispatch = useDispatch();
+	const [CategoryItem, setCategoryItem] = useState([]);
+	const [Product, setProducts] = useState([]);
+
+	useEffect(() => {
+		const collRef = collection(db, 'Posts');
+		const CategoryCollection = collection(db, 'Category');
+		const snapRef = onSnapshot(collRef, (querySnapshot) => {
+			const data = querySnapshot.docs.map((query) => query.data());
+			setProducts(...Product, data);
+		});
+		const categoryRef = onSnapshot(CategoryCollection, (querySnapshot) => {
+			const data = querySnapshot.docs.map((query) => query.data());
+			setCategoryItem(...CategoryItem, data);
+		});
+		return () => {
+			snapRef();
+			categoryRef();
+		};
+	}, []);
 
 	return (
 		<>
@@ -37,8 +55,8 @@ function Home() {
 					Top Products
 				</Typography>
 				<Wrapper>
-					{productItems &&
-						productItems.map((data) => (
+					{Product &&
+						Product.map((data) => (
 							<ProductCard
 								key={data.id}
 								{...data}
