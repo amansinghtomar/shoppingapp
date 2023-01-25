@@ -15,15 +15,18 @@ export const CategoryList = [
 		items: [
 			{
 				id: 1,
-				name: 'Gift',
+				name: 'Gifts',
+				checked: false,
 			},
 			{
 				id: 2,
 				name: 'Craft',
+				checked: false,
 			},
 			{
 				id: 3,
 				name: 'Painting',
+				checked: false,
 			},
 		],
 	},
@@ -34,18 +37,22 @@ export const CategoryList = [
 			{
 				id: 1,
 				name: '100 - 500',
+				checked: false,
 			},
 			{
 				id: 2,
 				name: '500 - 1000',
+				checked: false,
 			},
 			{
 				id: 3,
 				name: '1000 - 1500',
+				checked: false,
 			},
 			{
 				id: 4,
 				name: '1500 - 2000',
+				checked: false,
 			},
 		],
 	},

@@ -23,7 +23,7 @@ import AlertBox from '../../components/Alert/Alert';
 export default function ProductDetails() {
 	const location = useLocation();
 	const [product, setProduct] = useState({});
-	const { posts } = useSelector((state) => state.post);
+	const { products } = useSelector((state) => state.product);
 	const dispatch = useDispatch();
 	const [alert, setAlert] = React.useState({
 		visible: false,
@@ -38,7 +38,8 @@ export default function ProductDetails() {
 	useEffect(() => {
 		const { pathname } = location;
 		const id = pathname.split('/')[2];
-		const newproduct = posts.length > 0 && posts.find((post) => post.id === id);
+		const newproduct =
+			products.length > 0 && products.find((post) => post.id === id);
 		if (newproduct) {
 			setProduct(newproduct);
 		} else {

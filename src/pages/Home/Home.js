@@ -7,12 +7,15 @@ import { useNavigate } from 'react-router-dom';
 import ProductCard from '../../components/Card/ProductCard';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../../firebase';
+import { useDispatch } from 'react-redux';
+import { handleCategoryFilter } from '../../redux/userPostSlice';
 
 function Home() {
 	const route = useNavigate();
 	//const dispatch = useDispatch();
 	const [CategoryItem, setCategoryItem] = useState([]);
 	const [Product, setProducts] = useState([]);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		const collRef = collection(db, 'Posts');
@@ -31,6 +34,11 @@ function Home() {
 		};
 	}, []);
 
+	const handleCategoryClick = (id) => {
+		dispatch(handleCategoryFilter([id]));
+		route(`category/${id}`);
+	};
+
 	return (
 		<>
 			<Image alt="background Image" src={image} />
@@ -44,7 +52,7 @@ function Home() {
 							<Category
 								key={data.id}
 								{...data}
-								categoryClick={(id) => route(`category/${id}`)}
+								categoryClick={(id) => handleCategoryClick(id)}
 							/>
 						))}
 				</Wrapper>
@@ -60,7 +68,7 @@ function Home() {
 							<ProductCard
 								key={data.id}
 								{...data}
-								cardClick={(id) => route(`product/${id}`)}
+								cardClick={(id) => route(`product/${id.trim()}`)}
 							/>
 						))}
 				</Wrapper>

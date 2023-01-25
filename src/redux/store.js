@@ -9,7 +9,7 @@ import thunk from 'redux-thunk';
 
 const reducers = combineReducers({
 	auth: AuthReducer,
-	post: ProductReducer,
+	product: ProductReducer,
 	cart: CartReducer,
 });
 
