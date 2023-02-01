@@ -27,11 +27,13 @@ export const WishlistProductWrapper = styled.div`
 	flex-direction: column;
 	display: flex;
 	gap: 5px;
+	align-items: center;
 `;
 
 export const WishlistProductImage = styled.img`
 	width: 200px;
 	height: 260px;
+	object-fit: cover;
 `;
 
 export const WishlistProductName = styled.div`

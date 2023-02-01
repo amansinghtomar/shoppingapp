@@ -32,12 +32,15 @@ export default function ProductDetails() {
 		open: false,
 	});
 	const timerRef = React.useRef(null);
-	const updateTextAddToBag = location.state;
+	const [isProductInCart, setIsProductInCart] = useState(false);
 	const router = useNavigate();
+	const cartItems = useSelector((state) => state.cart.cartItems);
 
 	useEffect(() => {
 		const { pathname } = location;
 		const id = pathname.split('/')[2];
+		const product = cartItems.find((item) => item.id === id);
+		if (product) setIsProductInCart(true);
 		const newproduct =
 			products.length > 0 && products.find((post) => post.id === id);
 		if (newproduct) {
@@ -72,8 +75,12 @@ export default function ProductDetails() {
 		timerRef.current = setTimeout(() => {
 			setAlert({ visible: false, severity: '', message: '' });
 		}, 2000);
-		dispatch(addCartItems({ ...product, quantity: 10 }));
+		dispatch(addCartItems({ ...product, quantity: 1 }));
 	};
+
+	const handleWishList = () => {
+		
+	}
 
 	return (
 		<>
@@ -101,8 +108,9 @@ export default function ProductDetails() {
 							TotalMRP={product.TotalMRP}
 							productDiscount={product.productDiscount}
 							handleAddToCart={handleAddToCart}
-							updateTextAddToBag={updateTextAddToBag}
+							updateTextAddToBag={isProductInCart}
 							handleGoToCart={handleGoToCart}
+							handleWishList={handleWishList}
 						/>
 
 						<ProductInfo

@@ -43,6 +43,7 @@ export const ProductActions = ({
 	handleAddToCart,
 	updateTextAddToBag,
 	handleGoToCart,
+	handleWishlist,
 }) => (
 	<>
 		<PriceContainer>
@@ -83,7 +84,12 @@ export const ProductActions = ({
 				</Button>
 			)}
 
-			<Button width="135px" height="41px" border-radius="5px">
+			<Button
+				width="135px"
+				height="41px"
+				border-radius="5px"
+				onClick={handleWishlist}
+			>
 				Whishlist
 			</Button>
 		</ButtonContainer>

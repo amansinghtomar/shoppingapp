@@ -38,21 +38,37 @@ export const CategoryList = [
 				id: 1,
 				name: '100 - 500',
 				checked: false,
+				value: {
+					minValue: 100,
+					maxValue: 500,
+				},
 			},
 			{
 				id: 2,
 				name: '500 - 1000',
 				checked: false,
+				value: {
+					minValue: 500,
+					maxValue: 1000,
+				},
 			},
 			{
 				id: 3,
 				name: '1000 - 1500',
 				checked: false,
+				value: {
+					minValue: 1000,
+					maxValue: 1500,
+				},
 			},
 			{
 				id: 4,
 				name: '1500 - 2000',
 				checked: false,
+				value: {
+					minValue: 1500,
+					maxValue: 2000,
+				},
 			},
 		],
 	},

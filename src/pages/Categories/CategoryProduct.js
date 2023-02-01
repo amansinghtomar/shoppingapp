@@ -6,72 +6,109 @@ import {
 } from './CategoryStyles';
 import Dropdown from '../../components/MenuItem/Dropdown';
 import ProductCard from '../../components/Card/ProductCard';
-import { useNavigate, useParams } from 'react-router-dom';
-import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { useSelector } from 'react-redux';
 
 const options = [
 	{
 		id: 1,
-		value: 'Newest',
+		value: 'High to Low',
 	},
 	{
 		id: 2,
-		value: 'Older',
+		value: 'Low to High',
 	},
 ];
 
 function CategoryProduct() {
 	const router = useNavigate();
 	const [Products, setProducts] = useState([]);
-	const { id } = useParams();
 	const filteredCategory = useSelector((state) => state.product.categoryFilter);
 	const filteredPrice = useSelector((state) => state.product.priceFilter);
+	const [filterValue, setFilterValue] = useState('High to Low');
 
-	console.log(filteredCategory);
+	const sortProducts = (products) => {
+		const sortedProducts = products.sort((r1, r2) =>
+			r2.productPrice > r1.productPrice
+				? 1
+				: r2.productPrice < r1.productPrice
+				? -1
+				: 0
+		);
+		return sortedProducts;
+	};
 
-	const generateQuery = (collRef, filteredCategory) => {
+	const sortDescProducts = (products) => {
+		const sortedProducts = products.sort((r1, r2) =>
+			r2.productPrice > r1.productPrice
+				? -1
+				: r2.productPrice < r1.productPrice
+				? 1
+				: 0
+		);
+		return sortedProducts;
+	};
+
+	const generateQuery = (collRef, filteredCategory, filteredPrice) => {
 		let q;
-		if (filteredCategory.length > 0) {
+		if (
+			filteredCategory.length > 0 &&
+			Object.keys(filteredPrice).length === 0
+		) {
+			q = query(collRef, where('category', 'in', filteredCategory));
+		} else if (
+			filteredCategory.length > 0 &&
+			Object.keys(filteredPrice).length > 0
+		) {
 			q = query(
 				collRef,
-				//where('category', '==', id),
-				where('category', 'in', filteredCategory)
+				where('category', 'in', filteredCategory),
+				where('productPrice', '>=', filteredPrice.minValue),
+				where('productPrice', '<=', filteredPrice.maxValue)
 			);
 		} else {
 			q = query(collRef, where('category', '==', ''));
 		}
 		return q;
 	};
+
+	const handleFilterValue = (value) => {
+		let products;
+		if (value === 'Low to High') {
+			products = sortDescProducts(Products);
+		} else {
+			products = sortProducts(Products);
+		}
+		setProducts(products);
+		setFilterValue(value);
+	};
+
 	useEffect(() => {
 		const collRef = collection(db, 'Posts');
 
-		const productRef = onSnapshot(
-			generateQuery(collRef, filteredCategory),
-			(querySnapshot) => {
-				const data = querySnapshot.docs.map((query) => query.data());
-				setProducts(data);
-			}
-		);
-
-		return () => {
-			productRef();
-		};
-	}, [filteredCategory]);
+		const query = generateQuery(collRef, filteredCategory, filteredPrice);
+		getDocs(query).then((querySnapshot) => {
+			let finaldata = [];
+			querySnapshot.forEach((doc) => {
+				finaldata.push(doc.data());
+			});
+			setProducts(sortProducts(finaldata));
+		});
+	}, [filteredCategory, filteredPrice]);
 
 	const handleClick = (id) => {
 		router(`/product/${id}`);
 	};
 
-	//console.log(Products);
 	return (
 		<CategoryProductContainer>
 			<TopProductContainer>
 				<Dropdown
 					options={options}
-					selectedValue="Newest"
-					handleUpdateItem={() => {}}
+					selectedValue={filterValue}
+					handleUpdateItem={handleFilterValue}
 					size="large"
 				/>
 			</TopProductContainer>

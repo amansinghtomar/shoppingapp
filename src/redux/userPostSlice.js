@@ -4,7 +4,7 @@ const initialState = {
 	loading: true,
 	products: {},
 	categoryFilter: [],
-	priceFilter: [],
+	priceFilter: {},
 };
 
 const ProductSlice = createSlice({

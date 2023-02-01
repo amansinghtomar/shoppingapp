@@ -29,29 +29,61 @@ function CategoryFilter() {
 		setCategoryItem(newCategoryItem);
 	}, []);
 
+	const getMinMaxValue = (newCategoryItem, filteredPrice) => {
+		let newFilteredPrice = {};
+		const checkedCategory = newCategoryItem[1].items.filter(
+			(item) => item.checked
+		);
+		console.log(checkedCategory);
+
+		checkedCategory.find((item) => {
+			if (Object.keys(filteredPrice).length === 0) {
+				newFilteredPrice.minValue = item.value.minValue;
+				newFilteredPrice.maxValue = item.value.maxValue;
+			}
+			if (item.value.minValue < newFilteredPrice.minValue)
+				newFilteredPrice.minValue = item.value.minValue;
+			if (item.value.maxValue > newFilteredPrice.maxValue)
+				newFilteredPrice.maxValue = item.value.maxValue;
+		});
+		return newFilteredPrice;
+	};
+
 	const handleCategory = (label, name, checked) => {
+		let newCategoryItem = JSON.parse(JSON.stringify(categoryItem));
 		switch (label) {
 			case 'Category': {
 				let newFilterCategory = [...filteredCategory];
+				console.log(checked);
 				if (checked) {
+					newCategoryItem[0].items.find((item) => {
+						if (item.name === name) item.checked = true;
+					});
 					newFilterCategory.push(name);
 				} else {
+					newCategoryItem[0].items.find((item) => {
+						if (item.name === name) item.checked = false;
+					});
 					newFilterCategory = newFilterCategory.filter((item) => {
 						return name != item;
 					});
 				}
+				setCategoryItem(newCategoryItem);
 				dispatch(handleCategoryFilter(newFilterCategory));
 				break;
 			}
 			case 'Price': {
-				let newFilteredPrice = [...filteredPrice];
 				if (checked) {
-					newFilteredPrice.push(name);
+					newCategoryItem[1].items.find((item) => {
+						if (item.name === name) item.checked = true;
+					});
 				} else {
-					newFilteredPrice = newFilteredPrice.filter((item) => {
-						return name != item;
+					newCategoryItem[1].items.find((item) => {
+						if (item.name === name) item.checked = false;
 					});
 				}
+				const newFilteredPrice = getMinMaxValue(newCategoryItem, filteredPrice);
+				setCategoryItem(newCategoryItem);
 				dispatch(handlePriceFilter(newFilteredPrice));
 				break;
 			}
@@ -59,8 +91,6 @@ function CategoryFilter() {
 				break;
 		}
 	};
-
-	console.log(categoryItem);
 
 	return (
 		<CategoryFilterContainer>

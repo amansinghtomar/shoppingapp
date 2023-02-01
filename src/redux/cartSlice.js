@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { current } from '@reduxjs/toolkit';
 import { db } from '../firebase';
 import { doc, updateDoc } from 'firebase/firestore';
-import { async } from '@firebase/util';
 
 const initialState = {
 	cartItems: [],
