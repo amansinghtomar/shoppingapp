@@ -10,6 +10,7 @@ import { db } from '../../firebase';
 import { useDispatch } from 'react-redux';
 import { handleCategoryFilter } from '../../redux/userPostSlice';
 
+
 function Home() {
 	const route = useNavigate();
 	//const dispatch = useDispatch();

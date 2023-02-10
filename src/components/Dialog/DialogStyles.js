@@ -1,33 +1,14 @@
+import { Dialog } from '@mui/material';
+import DialogContent from '@mui/material/DialogContent';
 import styled from 'styled-components';
 
-export const ContainerHeading = styled.div`
-	display: flex;
-	border-bottom: 1px solid lightgray;
-	padding: 14px;
-	justify-content: space-between;
+export const DialogContentWrapper = styled(DialogContent)`
+	padding: 5rem 4rem !important;
+	border-radius: 50px;
 `;
 
-export const ProductName = styled.div`
-	font-size: 20px;
-	font-weight: 600;
+export const DialogWrapper = styled(Dialog)`
+	width: 500px;
+	height: 417px;
+	margin: auto;
 `;
-
-export const ProductPrice = styled.div`
-	font-size: 20px;
-	font-weight: 600;
-`;
-
-export const ProductDetail = styled.div`
-	border-bottom: 1px solid lightgray;
-	padding: 14px;
-	font-weight: 400;
-`;
-export const ProductReview = styled.div`
-	padding: 14px;
-`;
-export const ReviewContainer = styled.div`
-	padding: 14px;
-	font-weight: 400;
-`;
-
-export const ProductReviewDeatils = styled.div``;

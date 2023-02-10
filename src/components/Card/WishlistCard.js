@@ -11,6 +11,7 @@ export default function WishlistCard({
 	productDiscount,
 	image,
 	cancelClick,
+	cartClick,
 }) {
 	return (
 		<WishListCardWrapper>
@@ -32,7 +33,9 @@ export default function WishlistCard({
 						color="primary"
 					>{`${productDiscount}% OFF`}</Typography>
 				</PriceContainer>
-				<Button text>Add To Bag</Button>
+				<Button text onClick={() => cartClick(id)}>
+					Add To Bag
+				</Button>
 			</Container>
 		</WishListCardWrapper>
 	);

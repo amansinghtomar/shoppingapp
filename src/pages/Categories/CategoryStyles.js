@@ -12,6 +12,14 @@ export const CategoryFilterContainer = styled.div`
 	width: 20%;
 	box-shadow: ${(props) => props.theme.boxShadow.light};
 	padding: 20px;
+
+	@media (max-width: 978px) {
+		width: 30%;
+	}
+
+	@media (max-width: 621px) {
+		display: none;
+	}
 `;
 
 export const CategoryProductContainer = styled.div`
@@ -19,6 +27,10 @@ export const CategoryProductContainer = styled.div`
 	width: 80%;
 	box-shadow: ${(props) => props.theme.boxShadow.light};
 	overflow: scroll;
+
+	@media (max-width: 621px) {
+		width: 100%;
+	}
 `;
 
 export const CheckboxContainer = styled.div`
@@ -41,6 +53,8 @@ export const TopProductContainer = styled.div`
 `;
 
 export const ProductList = styled.div`
-	display: flex;
-	flex-wrap: wrap;
+	/* display: flex;
+	flex-wrap: wrap; */
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
 `;

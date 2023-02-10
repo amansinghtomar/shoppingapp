@@ -22,4 +22,10 @@ export const Wrapper = styled.div`
 	gap: 20px;
 	align-items: center;
 	flex-wrap: wrap;
+
+	@media (max-width: 549px) {
+		justify-content: center;
+	}
 `;
+
+

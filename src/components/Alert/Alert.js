@@ -3,21 +3,33 @@ import * as React from 'react';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import PropTypes from 'prop-types';
+import { useNotification } from '../../hooks/useNotification';
+import { useSelector } from 'react-redux';
 
-export default function AlertBox({ visible, severity, message, open }) {
+export default function AlertBox() {
+	const { removeNotification } = useNotification();
+	const { open, type, message, timeout } = useSelector(
+		(state) => state.notification
+	);
+
+	const handleClose = () => {
+		removeNotification();
+	};
+
 	return (
-		visible && (
-			<Snackbar
-				open={open}
-				autoHideDuration={6000}
-				anchorOrigin={{
-					vertical: 'top',
-					horizontal: 'center',
-				}}
-			>
-				<Alert severity={severity}>{message}</Alert>
-			</Snackbar>
-		)
+		<Snackbar
+			open={open}
+			autoHideDuration={timeout}
+			onClose={handleClose}
+			anchorOrigin={{
+				vertical: 'top',
+				horizontal: 'center',
+			}}
+		>
+			<Alert severity={type} onClose={handleClose}>
+				{message}
+			</Alert>
+		</Snackbar>
 	);
 }
 

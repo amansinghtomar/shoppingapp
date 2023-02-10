@@ -1,13 +1,7 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 import Form from '../Form/Form';
 import useInput from '../../hooks/useInput';
+import { DialogContentWrapper, DialogWrapper } from './DialogStyles';
 
 export default function FormDialog({ open, handleClose }) {
 	const { value, handleChange, isValid, errors, touched, onBlur } = useInput({
@@ -25,8 +19,8 @@ export default function FormDialog({ open, handleClose }) {
 
 	return (
 		<div>
-			<Dialog open={open} onClose={handleClose}>
-				<DialogContent>
+			<DialogWrapper open={open} onClose={handleClose}>
+				<DialogContentWrapper>
 					<Form
 						formTitle="Apply coupn"
 						formFields={applyCouponInput}
@@ -38,8 +32,8 @@ export default function FormDialog({ open, handleClose }) {
 						isValid={isValid}
 						handleActionButton={handleClose}
 					/>
-				</DialogContent>
-			</Dialog>
+				</DialogContentWrapper>
+			</DialogWrapper>
 		</div>
 	);
 }

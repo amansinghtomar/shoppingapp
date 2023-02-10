@@ -19,22 +19,17 @@ import { addCartItems } from '../../redux/cartSlice';
 import Reviews from './Reviews';
 import { ProductHeader, ProductActions, ProductInfo } from './ProductInfo';
 import AlertBox from '../../components/Alert/Alert';
+import { addWishlistItems } from '../../redux/wishlistSlice';
 
 export default function ProductDetails() {
 	const location = useLocation();
 	const [product, setProduct] = useState({});
 	const { products } = useSelector((state) => state.product);
 	const dispatch = useDispatch();
-	const [alert, setAlert] = React.useState({
-		visible: false,
-		severity: '',
-		message: '',
-		open: false,
-	});
-	const timerRef = React.useRef(null);
 	const [isProductInCart, setIsProductInCart] = useState(false);
 	const router = useNavigate();
 	const cartItems = useSelector((state) => state.cart.cartItems);
+	//const wishlistItem = useSelector((state) => state.wishlist.wishlistItems);
 
 	useEffect(() => {
 		const { pathname } = location;
@@ -49,6 +44,13 @@ export default function ProductDetails() {
 			getData(id);
 		}
 	}, []);
+
+	useEffect(() => {
+		const { pathname } = location;
+		const id = pathname.split('/')[2];
+		const product = cartItems.find((item) => item.id === id);
+		if (product) setIsProductInCart(true);
+	}, [cartItems]);
 
 	const getData = async (id) => {
 		const collRef = collection(db, 'Posts');
@@ -66,21 +68,23 @@ export default function ProductDetails() {
 	};
 
 	const handleAddToCart = () => {
-		setAlert({
-			visible: true,
-			severity: 'success',
-			message: 'Product added successfully',
-			open: true,
-		});
-		timerRef.current = setTimeout(() => {
-			setAlert({ visible: false, severity: '', message: '' });
-		}, 2000);
+		// setAlert({
+		// 	visible: true,
+		// 	severity: 'success',
+		// 	message: 'Product added successfully',
+		// 	open: true,
+		// });
+		// timerRef.current = setTimeout(() => {
+		// 	setAlert({ visible: false, severity: '', message: '' });
+		// }, 2000);
+
 		dispatch(addCartItems({ ...product, quantity: 1 }));
 	};
 
-	const handleWishList = () => {
-		
-	}
+	const handleWishList1 = () => {
+		console.log('handleWishlist');
+		dispatch(addWishlistItems(product));
+	};
 
 	return (
 		<>
@@ -110,7 +114,7 @@ export default function ProductDetails() {
 							handleAddToCart={handleAddToCart}
 							updateTextAddToBag={isProductInCart}
 							handleGoToCart={handleGoToCart}
-							handleWishList={handleWishList}
+							handleWishlist={handleWishList1}
 						/>
 
 						<ProductInfo

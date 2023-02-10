@@ -9,7 +9,7 @@ export default function Setting() {
 		<SettingContainer>
 			{location.state.length !== 0 &&
 				location.state.map((item) => (
-					<ItemConatiner>
+					<ItemConatiner key={item.id}>
 						<Typography as="h4" fontWeight="500">
 							{item}
 						</Typography>

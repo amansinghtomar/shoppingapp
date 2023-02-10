@@ -18,7 +18,7 @@ export const WishlistProductCount = styled.div`
 export const WishlistConatiner = styled.div`
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
+	//justify-content: center;
 `;
 
 export const WishlistProductWrapper = styled.div`

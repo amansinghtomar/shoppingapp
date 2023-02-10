@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import AlertBox from '../../components/Alert/Alert';
 import ShoppingCard from '../../components/Card/ShoppingCard';
 import { removeCartItems, updateCartItems } from '../../redux/cartSlice';
 import { CartCardContainer, CartLeftConatiner } from './CartStyles';
@@ -17,6 +18,7 @@ function CartLeft() {
 	};
 	return (
 		<CartLeftConatiner>
+			<AlertBox />
 			<CartCardContainer>
 				{cartItems.map((cartValue) => (
 					<ShoppingCard

@@ -5,9 +5,10 @@ import {
 	signInWithPopup,
 	updateProfile,
 } from 'firebase/auth';
-import { addDoc, collection, doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { auth, db, provider } from '../firebase';
-import { initiateCart, initiateMyCart } from './cartSlice';
+import { initiateCart } from './cartSlice';
+import { initiateWishlist } from './wishlistSlice';
 
 const initialState = {
 	loading: false,
@@ -31,6 +32,7 @@ export const userAuth = createAsyncThunk('auth', async (value) => {
 		uid: response.user.uid,
 		role: '',
 		cart: [],
+		wishlist: [],
 		following: [],
 		address: '',
 	};
@@ -47,6 +49,7 @@ export const userSignIn = createAsyncThunk(
 		const docRef = doc(db, 'Users', response.user.uid);
 		const docSnap = await getDoc(docRef);
 		dispatch(initiateCart(docSnap.data().cart));
+		dispatch(initiateWishlist(docSnap.data().wishlist));
 		return docSnap.data();
 	}
 );
@@ -65,6 +68,7 @@ export const googleSignIn = createAsyncThunk('user/googleSignIn', async () => {
 		uid: response.user.uid,
 		role: '',
 		cart: [],
+		wishlist: [],
 		following: [],
 		address: '',
 	};

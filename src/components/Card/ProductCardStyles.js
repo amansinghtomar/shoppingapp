@@ -10,6 +10,12 @@ export const Card = styled.div`
 	&:hover {
 		cursor: pointer;
 	}
+
+	@media (max-width: 519px) {
+		width: 100;
+	}
+
+	
 `;
 
 export const CardImage = styled.div`

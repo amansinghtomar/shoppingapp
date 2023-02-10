@@ -2,8 +2,6 @@ import React from 'react';
 //MUI Library
 import Typography from '../Typography/Typography';
 import Avatar from '@mui/material/Avatar';
-import Tooltip from '@mui/material/Tooltip';
-import IconButton from '@mui/material/IconButton';
 import Items from '../MenuItem/Items';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import PersonAdd from '@mui/icons-material/PersonAdd';

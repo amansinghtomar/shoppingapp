@@ -3,18 +3,30 @@ import {
 	WishListMainContainer,
 	WishlistProductCount,
 	WishlistConatiner,
-	WishlistProductImage,
-	WishlistProductWrapper,
 	WishListHeading,
-	WishlistProductName,
-	WishlistProductPrice,
 } from './WishlistStyles';
-import { Button } from '../../components/Button/Button';
-import { WishListData } from '../../utils/WishListData';
 import WishListCard from '../../components/Card/WishlistCard';
 import Typography from '../../components/Typography/Typography';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeWishlistItems } from '../../redux/wishlistSlice';
+import { addCartItems } from '../../redux/cartSlice';
 
 export default function Wishlist() {
+	const wishlistData = useSelector((state) => state.wishlist.wishlistItems);
+	const dispatch = useDispatch();
+
+	const handleCartClick = (id) => {
+		const product = wishlistData.find((item) => item.id === id);
+
+		if (product) {
+			dispatch(addCartItems({ ...product, quantity: 1 }));
+		}
+	};
+
+	const handleCancelClick = (id) => {
+		dispatch(removeWishlistItems(id));
+	};
+
 	return (
 		<WishListMainContainer>
 			<WishListHeading>
@@ -23,14 +35,21 @@ export default function Wishlist() {
 				</Typography>
 				<WishlistProductCount>
 					<Typography as="h4" fontWeight="300">{`${
-						WishListData && WishListData.length
+						wishlistData && wishlistData.length
 					} Product`}</Typography>
 				</WishlistProductCount>
 			</WishListHeading>
 
 			<WishlistConatiner>
-				{WishListData.length !== 0 &&
-					WishListData.map((data) => <WishListCard key={data.id} {...data} />)}
+				{wishlistData.length !== 0 &&
+					wishlistData.map((data) => (
+						<WishListCard
+							key={data.id}
+							{...data}
+							cartClick={handleCartClick}
+							cancelClick={handleCancelClick}
+						/>
+					))}
 			</WishlistConatiner>
 		</WishListMainContainer>
 	);

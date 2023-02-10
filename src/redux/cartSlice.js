@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { current } from '@reduxjs/toolkit';
 import { db } from '../firebase';
 import { doc, updateDoc } from 'firebase/firestore';
+import { addNotification } from './notificationSlice';
 
 const initialState = {
 	cartItems: [],
@@ -17,29 +18,59 @@ const initialState = {
 
 export const addCartItems = createAsyncThunk(
 	'cart',
-	async (value, { getState }) => {
+	async (value, { getState, dispatch }) => {
 		const state = getState();
 		console.log(state.auth.userInfo.uid);
 		const docRef = doc(db, 'Users', state.auth.userInfo.uid);
-		await updateDoc(docRef, {
-			cart: [...state.cart.cartItems, value],
-		});
+		try {
+			await updateDoc(docRef, {
+				cart: [...state.cart.cartItems, value],
+			});
+			dispatch(
+				addNotification({
+					message: 'Product added successfully',
+					type: 'success',
+				})
+			);
+		} catch (error) {
+			dispatch(
+				addNotification({
+					message: error,
+					type: 'error',
+				})
+			);
+		}
 		return value;
 	}
 );
 
 export const removeCartItems = createAsyncThunk(
 	'removeCart',
-	async (value, { getState }) => {
+	async (value, { getState, dispatch }) => {
 		const state = getState();
 		const docRef = doc(db, 'Users', state.auth.userInfo.uid);
 		const updatedCart = state.cart.cartItems.filter(
 			(item) => item.id !== value
 		);
 		console.log('updatedCart', updatedCart, value);
-		await updateDoc(docRef, {
-			cart: updatedCart,
-		});
+		try {
+			await updateDoc(docRef, {
+				cart: updatedCart,
+			});
+			dispatch(
+				addNotification({
+					message: 'Product removed successfully',
+					type: 'success',
+				})
+			);
+		} catch (error) {
+			dispatch(
+				addNotification({
+					message: error,
+					type: 'error',
+				})
+			);
+		}
 		return updatedCart;
 	}
 );

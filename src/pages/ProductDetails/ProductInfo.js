@@ -18,7 +18,7 @@ import { Divider } from '@mui/material';
 export const ProductHeader = ({ productName, review, star }) => (
 	<>
 		<ProductTitleConatainer>
-			<Typography as="h1" fontWeight="600">
+			<Typography variant="h1" >
 				{productName}
 			</Typography>
 			<ShareIcon>Share</ShareIcon>
@@ -47,8 +47,8 @@ export const ProductActions = ({
 }) => (
 	<>
 		<PriceContainer>
-			<Typography as="h2" fontWeight="600">{`$ ${productPrice}`}</Typography>
-			<Typography as="h2" fontWeight="600">
+			<Typography variant="h2" >{`$ ${productPrice}`}</Typography>
+			<Typography variant="body1" color="grey">
 				<s>{`MRP ${TotalMRP}`}</s>
 			</Typography>
 			<Typography
@@ -57,12 +57,12 @@ export const ProductActions = ({
 			>{`${productDiscount}% OFF`}</Typography>
 		</PriceContainer>
 		<Typography
-			fontWeight="100"
+			variant='body1'
 			color="primary"
 		>{`Inclusive of all taxes`}</Typography>
 
 		<ButtonContainer>
-			{updateTextAddToBag === null ? (
+			{!updateTextAddToBag ? (
 				<Button
 					width="135px"
 					height="41px"
@@ -88,7 +88,7 @@ export const ProductActions = ({
 				width="135px"
 				height="41px"
 				border-radius="5px"
-				onClick={handleWishlist}
+				onClick={() => handleWishlist()}
 			>
 				Whishlist
 			</Button>

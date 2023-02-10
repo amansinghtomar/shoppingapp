@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 export default function Category({ name, image, categoryClick }) {
 	return (
 		<CategoryContainer onClick={() => categoryClick(name)}>
-			<Avatar sx={{ width: 200, height: 200 }} src={image} alt="Painting" />
+			<Avatar sx={{ width: 150, height: 150 }} src={image} alt="Painting" />
 			<Typography variant="p" align="center">
 				{name}
 			</Typography>
