@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { useSelector } from 'react-redux';
+import Pagination from '../../components/Pagination/Pagination';
 
 const options = [
 	{
@@ -28,6 +29,26 @@ function CategoryProduct() {
 	const filteredCategory = useSelector((state) => state.product.categoryFilter);
 	const filteredPrice = useSelector((state) => state.product.priceFilter);
 	const [filterValue, setFilterValue] = useState('High to Low');
+	const [currentPage, setCurrentPage] = useState(1);
+	const PAGE_SIZE = 1;
+
+	useEffect(() => {
+		const collRef = collection(db, 'Posts');
+
+		const query = generateQuery(collRef, filteredCategory, filteredPrice);
+		getDocs(query).then((querySnapshot) => {
+			let finaldata = [];
+			querySnapshot.forEach((doc) => {
+				finaldata.push(doc.data());
+			});
+			console.log(finaldata);
+			setProducts(sortProducts(finaldata));
+		});
+	}, [filteredCategory, filteredPrice]);
+
+	const onPageChange = (value) => {
+		setCurrentPage(value);
+	};
 
 	const sortProducts = (products) => {
 		const sortedProducts = products.sort((r1, r2) =>
@@ -85,22 +106,11 @@ function CategoryProduct() {
 		setFilterValue(value);
 	};
 
-	useEffect(() => {
-		const collRef = collection(db, 'Posts');
-
-		const query = generateQuery(collRef, filteredCategory, filteredPrice);
-		getDocs(query).then((querySnapshot) => {
-			let finaldata = [];
-			querySnapshot.forEach((doc) => {
-				finaldata.push(doc.data());
-			});
-			setProducts(sortProducts(finaldata));
-		});
-	}, [filteredCategory, filteredPrice]);
-
 	const handleClick = (id) => {
 		router(`/product/${id}`);
 	};
+
+	console.log(Math.round(Products.length / PAGE_SIZE), Products);
 
 	return (
 		<CategoryProductContainer>
@@ -113,11 +123,21 @@ function CategoryProduct() {
 				/>
 			</TopProductContainer>
 			<ProductList>
-				{Products &&
-					Products.map((item) => (
+				{Products.length > 0 &&
+					Products.slice(
+						currentPage * PAGE_SIZE,
+						currentPage * PAGE_SIZE + PAGE_SIZE
+					).map((item) => (
 						<ProductCard key={item.id} {...item} cardClick={handleClick} />
 					))}
 			</ProductList>
+			{Products.length > 0 && (
+				<Pagination
+					totalPage={Math.ceil(Products.length / PAGE_SIZE)}
+					currentPage={currentPage}
+					onPageChange={onPageChange}
+				/>
+			)}
 		</CategoryProductContainer>
 	);
 }

@@ -19,13 +19,19 @@ export const Container = styled.div`
 
 export const Wrapper = styled.div`
 	display: flex;
-	gap: 20px;
 	align-items: center;
 	flex-wrap: wrap;
+	//justify-content: space-between;
+	gap: 5px;
+	//padding: 20px;
 
-	@media (max-width: 549px) {
-		justify-content: center;
+	@media (max-width: 1040px) {
+		justify-content: space-around;
+	}
+	@media (max-width: 539px) {
+		padding: 0px;
+	}
+	@media (max-width: 439px) {
+		gap: 0;
 	}
 `;
-
-

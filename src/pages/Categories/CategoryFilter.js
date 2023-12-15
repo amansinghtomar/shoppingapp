@@ -22,10 +22,9 @@ function CategoryFilter() {
 
 	useEffect(() => {
 		const newCategoryItem = JSON.parse(JSON.stringify(categoryItem));
-		newCategoryItem[0].items.find((item) => {
+		newCategoryItem[0].items.forEach((item) => {
 			if (item.name === id) item.checked = true;
 		});
-		//console.log(categoryItem);
 		setCategoryItem(newCategoryItem);
 	}, []);
 
@@ -34,9 +33,8 @@ function CategoryFilter() {
 		const checkedCategory = newCategoryItem[1].items.filter(
 			(item) => item.checked
 		);
-		console.log(checkedCategory);
 
-		checkedCategory.find((item) => {
+		checkedCategory.forEach((item) => {
 			if (Object.keys(filteredPrice).length === 0) {
 				newFilteredPrice.minValue = item.value.minValue;
 				newFilteredPrice.maxValue = item.value.maxValue;
@@ -54,14 +52,13 @@ function CategoryFilter() {
 		switch (label) {
 			case 'Category': {
 				let newFilterCategory = [...filteredCategory];
-				console.log(checked);
 				if (checked) {
-					newCategoryItem[0].items.find((item) => {
+					newCategoryItem[0].items.forEach((item) => {
 						if (item.name === name) item.checked = true;
 					});
 					newFilterCategory.push(name);
 				} else {
-					newCategoryItem[0].items.find((item) => {
+					newCategoryItem[0].items.forEach((item) => {
 						if (item.name === name) item.checked = false;
 					});
 					newFilterCategory = newFilterCategory.filter((item) => {
@@ -74,11 +71,11 @@ function CategoryFilter() {
 			}
 			case 'Price': {
 				if (checked) {
-					newCategoryItem[1].items.find((item) => {
+					newCategoryItem[1].items.forEach((item) => {
 						if (item.name === name) item.checked = true;
 					});
 				} else {
-					newCategoryItem[1].items.find((item) => {
+					newCategoryItem[1].items.forEach((item) => {
 						if (item.name === name) item.checked = false;
 					});
 				}
@@ -102,7 +99,6 @@ function CategoryFilter() {
 							<Checkbox
 								size="small"
 								value={category.name}
-								//defaultChecked={category.checked}
 								checked={category.checked}
 								onChange={(event) =>
 									handleCategory(

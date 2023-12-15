@@ -20,6 +20,7 @@ import {
 	NavList,
 	NavListConatiner,
 	NavUl,
+	NavHeading,
 } from './NavbarStyles';
 import { useNavigate } from 'react-router-dom';
 //firebase
@@ -99,9 +100,12 @@ export default function Navbar({ isAuthenticated }) {
 	};
 	return (
 		<NavbarContainer>
-			<Typography variant="h4">
-				My <span style={{ color: '#08a2ab' }}>Art Cart</span>{' '}
-			</Typography>
+			<NavHeading>
+				<Typography variant="h5" align='center'>
+					My <span style={{ color: '#08a2ab' }}>Art Cart</span>{' '}
+				</Typography>
+			</NavHeading>
+
 			<NavListConatiner className="nav">
 				<NavUl>
 					<NavList>

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const ButtonStyle = styled.button`
@@ -39,18 +40,38 @@ const ButtonStyle = styled.button`
 	}
 `;
 
-export const Button = (props) => {
-	const { children, startIcon, endIcon, background, text, color } = props;
+export const Button = ({
+	children,
+	startIcon,
+	endIcon,
+	background,
+	text,
+	color,
+	...rest
+}) => {
 	return (
 		<ButtonStyle
-			{...props}
+			{...rest}
 			background={text ? 'secondary' : background}
 			color={text ? 'primary' : color}
-			boxShadow={text && 'none'}
+			boxShadow={text ? 'none' : undefined}
 		>
 			{startIcon && <img src={startIcon} alt="startIcon" height="25px" />}
 			{children}
-			{endIcon && <img src={endIcon} alt="startIcon" height="25px" />}
+			{endIcon && <img src={endIcon} alt="endIcon" height="25px" />}
 		</ButtonStyle>
 	);
+};
+
+Button.propTypes = {
+	children: PropTypes.node.isRequired,
+	startIcon: PropTypes.string,
+	endIcon: PropTypes.string,
+	background: PropTypes.string,
+	text: PropTypes.bool,
+	color: PropTypes.string,
+	fullWidth: PropTypes.bool,
+	height: PropTypes.string,
+	boxShadow: PropTypes.string,
+	rounded: PropTypes.bool,
 };

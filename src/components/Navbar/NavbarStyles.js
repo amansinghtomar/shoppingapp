@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const NavbarContainer = styled.div`
+export const NavbarContainer = styled.nav`
 	display: flex;
 	position: sticky;
 	justify-content: space-between;
@@ -10,13 +10,26 @@ export const NavbarContainer = styled.div`
 	left: 0;
 	right: 0;
 	background: ${(props) => props.theme.colors.secondary};
-	padding: 25px 70px;
+	padding: 0 20px;
+	//margin-left: 20px;
 	height: 10vh;
 	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 	z-index: 1000;
+
+	@media (max-width: 512px) {
+		justify-content: center;
+		padding: 0;
+	}
+`;
+export const NavHeading = styled.div`
+	
 `;
 
-export const NavListConatiner = styled.nav``;
+export const NavListConatiner = styled.nav`
+	@media (max-width: 512px) {
+		display: none;
+	}
+`;
 
 export const NavUl = styled.ul`
 	display: flex;

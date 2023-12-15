@@ -53,8 +53,20 @@ export const TopProductContainer = styled.div`
 `;
 
 export const ProductList = styled.div`
-	/* display: flex;
-	flex-wrap: wrap; */
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	//justify-content: space-between;
+	gap: 5px;
+	//padding: 20px;
+
+	@media (max-width: 1040px) {
+		justify-content: space-around;
+	}
+	@media (max-width: 539px) {
+		padding: 0px;
+	}
+	@media (max-width: 439px) {
+		gap: 0;
+	}
 `;

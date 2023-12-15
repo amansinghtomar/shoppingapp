@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Card = styled.div`
 	display: inline-block;
 	position: relative;
-	margin: 20px;
+	margin: 10px;
 	width: 210px;
 	box-shadow: ${(props) => props.theme.boxShadow.light};
 	border-radius: 5px;
@@ -11,11 +11,17 @@ export const Card = styled.div`
 		cursor: pointer;
 	}
 
-	@media (max-width: 519px) {
-		width: 100;
+	@media (max-width: 539px) {
+		margin: 5px 0;
 	}
-
-	
+	@media (max-width: 439px) {
+		width: 190px;
+		margin: 5px 0;
+	}
+	@media (max-width: 379px) {
+		width: 100%;
+		margin: 5px;
+	}
 `;
 
 export const CardImage = styled.div`
@@ -25,6 +31,7 @@ export const CardImage = styled.div`
 	width: 100%;
 	background-size: cover;
 	background-repeat: no-repeat;
+	overflow: hidden;
 `;
 
 export const CardRating = styled.div`

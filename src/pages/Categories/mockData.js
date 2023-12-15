@@ -125,3 +125,130 @@ export const ProductItems = [
 		productDiscount: 10,
 	},
 ];
+
+
+export const mockData = [
+	{
+		location: 'Mumbai',
+		productName: 'Beautiful Product5',
+		DeliveryDate: 'Mon Sept 8',
+		name: 'Aman Tomar',
+		like: false,
+		TotalMRP: 2000,
+		id: 'wqQ1VDmvo2S6llcV4VpL',
+		timestamp: {
+			seconds: 1672845513,
+			nanoseconds: 709000000,
+		},
+		category: 'Gifts',
+		productDiscount: 200,
+		review: [
+			{
+				star: 2,
+				name: 'Nikita Ubale',
+				comment: 'Good product',
+			},
+			{
+				comment: 'Good product',
+				star: 2,
+				name: 'Nikita Ubale',
+			},
+			{
+				name: 'Nikita Ubale',
+				star: 2,
+				comment: 'Good product',
+			},
+		],
+		productDetail:
+			'It is a very good product It is a very good product It is a very good product It is a very good product ',
+		caption: 'this is my great art',
+		image:
+			'https://firebasestorage.googleapis.com/v0/b/shopping-app-efb7e.appspot.com/o/Products%2FPainting6.jpg?alt=media&token=933108d8-92bf-4e05-8c39-7c8329acfdeb',
+		productPrice: 1800,
+		SellerName: 'Nikita',
+		likeCount: 0,
+		star: 2,
+	},
+	{
+		location: 'Mumbai',
+		productName: 'Beautiful Product5',
+		DeliveryDate: 'Mon Sept 8',
+		name: 'Aman Tomar',
+		like: false,
+		TotalMRP: 2000,
+		id: 'wqQ1VDmvo2S6llcV4VpG',
+		timestamp: {
+			seconds: 1672845513,
+			nanoseconds: 709000000,
+		},
+		category: 'Gifts',
+		productDiscount: 200,
+		review: [
+			{
+				star: 2,
+				name: 'Nikita Ubale',
+				comment: 'Good product',
+			},
+			{
+				comment: 'Good product',
+				star: 2,
+				name: 'Nikita Ubale',
+			},
+			{
+				name: 'Nikita Ubale',
+				star: 2,
+				comment: 'Good product',
+			},
+		],
+		productDetail:
+			'It is a very good product It is a very good product It is a very good product It is a very good product ',
+		caption: 'this is my great art',
+		image:
+			'https://firebasestorage.googleapis.com/v0/b/shopping-app-efb7e.appspot.com/o/Products%2FPainting6.jpg?alt=media&token=933108d8-92bf-4e05-8c39-7c8329acfdeb',
+		productPrice: 1800,
+		SellerName: 'Nikita',
+		likeCount: 0,
+		star: 2,
+	},
+	{
+		location: 'Mumbai',
+		productName: 'Beautiful Product5',
+		DeliveryDate: 'Mon Sept 8',
+		name: 'Aman Tomar',
+		like: false,
+		TotalMRP: 2000,
+		id: 'wqQ1VDmvo2S6llcV4VpS',
+		timestamp: {
+			seconds: 1672845513,
+			nanoseconds: 709000000,
+		},
+		category: 'Gifts',
+		productDiscount: 200,
+		review: [
+			{
+				star: 2,
+				name: 'Nikita Ubale',
+				comment: 'Good product',
+			},
+			{
+				comment: 'Good product',
+				star: 2,
+				name: 'Nikita Ubale',
+			},
+			{
+				name: 'Nikita Ubale',
+				star: 2,
+				comment: 'Good product',
+			},
+		],
+		productDetail:
+			'It is a very good product It is a very good product It is a very good product It is a very good product ',
+		caption: 'this is my great art',
+		image:
+			'https://firebasestorage.googleapis.com/v0/b/shopping-app-efb7e.appspot.com/o/Products%2FPainting6.jpg?alt=media&token=933108d8-92bf-4e05-8c39-7c8329acfdeb',
+		productPrice: 1800,
+		SellerName: 'Nikita',
+		likeCount: 0,
+		star: 2,
+	},
+];

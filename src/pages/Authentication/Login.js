@@ -1,4 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 import Typography from '../../components/Typography/Typography';
 import {
 	Wrapper,
@@ -13,9 +16,7 @@ import { Button } from '../../components/Button/Button';
 import useInput from '../../hooks/useInput';
 import { emailValidate, passwordValidator } from '../../utils';
 import Form from '../../components/Form/Form';
-import { useDispatch, useSelector } from 'react-redux';
 import { googleSignIn, userSignIn } from '../../redux/authenticationSlice';
-import { useNavigate } from 'react-router-dom';
 import AlertBox from '../../components/Alert/Alert';
 import GoogleLogo from '../../assets/google.svg';
 
@@ -24,11 +25,34 @@ export default function Login() {
 	const dispatch = useDispatch();
 	const route = useNavigate();
 	const timerRef = useRef(null);
+
 	const [alert, setAlert] = useState({
 		visible: false,
 		severity: '',
 		message: '',
 	});
+
+	const validations = {
+		email: ({ email }) => emailValidate(email),
+		password: ({ password }) => passwordValidator(password),
+	};
+
+	const {
+		value: { email, password },
+		handleChange,
+		reset,
+		isValid,
+		errors,
+		touched,
+		onBlur,
+	} = useInput(
+		{
+			email: '',
+			password: '',
+			method: '',
+		},
+		validations
+	);
 
 	useEffect(() => {
 		if (user.isAuthenticated) {
@@ -49,34 +73,11 @@ export default function Login() {
 		}
 	}, [user.error]);
 
-	useEffect(() => {
-		return () => {
-			clearInterval(timerRef.current);
-		};
-	}, []);
+	useEffect(() => () => clearInterval(timerRef.current), []);
 
-	const validations = {
-		email: function ({ email }) {
-			return emailValidate(email);
-		},
-		password: function ({ password }) {
-			return passwordValidator(password);
-		},
-	};
-
-	const { value, handleChange, reset, isValid, errors, touched, onBlur } =
-		useInput(
-			{
-				email: '',
-				password: '',
-			},
-			validations
-		);
-
-	const handleSignin = (event) => {
+	const handleSignIn = (event) => {
 		event.preventDefault();
-		value.method = 'signin';
-		dispatch(userSignIn(value));
+		dispatch(userSignIn({ email, password, method: 'signin' }));
 		reset();
 	};
 
@@ -85,15 +86,16 @@ export default function Login() {
 			type: 'email',
 			placeholder: 'Email',
 			name: 'email',
-			value: value.email,
+			value: email,
 		},
 		{
 			type: 'password',
 			placeholder: 'Password',
 			name: 'password',
-			value: value.password,
+			value: password,
 		},
 	];
+
 	return (
 		<Wrapper>
 			<SignInContent>
@@ -112,7 +114,7 @@ export default function Login() {
 						errors={errors}
 						actionButtonTitle="Login"
 						isValid={isValid}
-						handleActionButton={handleSignin}
+						handleActionButton={handleSignIn}
 						loading={user.loading}
 					/>
 				</SignInTop>
